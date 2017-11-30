@@ -41,17 +41,24 @@ class ResourceHandler:
             resource = self.build_resource_dict(row)
         return jsonify(Resource=resource)
 
-    def getResourcesByCategory(self, r_category):
+    def searchResources(self, args):
+        category = args.get("category")
+        name = args.get("name")
         dao = ResourceDAO()
-        resource_list = dao.getResourceByCategory(r_category)
-        if not resource_list:
-            return jsonify(Error="Resource Not Found"), 404
+        resources_list = []
+        if category and name:
+            resources_list = dao.getResourceByCategoryAndName(category, name)
+        elif category:
+            resources_list = dao.getResourceByCategory(category)
+        elif name:
+            resources_list = dao.getResourceByName(name)
         else:
-            result_list = []
-            for row in resource_list:
-                result = self.build_resource_dict(row)
-                result_list.append(result)
-            return jsonify(Resources=result_list)
+            return jsonify(Error = "Malformed query string"), 400
+        result_list = []
+        for row in resources_list:
+            result = self.build_resource_dict(row)
+            result_list.append(result)
+        return jsonify(Resources=result_list)
 
     def getUserSuppliersByResourceId(self, r_id):
         dao = ResourceDAO()

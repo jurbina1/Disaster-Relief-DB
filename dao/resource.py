@@ -25,14 +25,32 @@ class ResourceDAO:
             result = cursor.fetchone()
             return result
 
-    def getResourceByCategory(self, r_id):
+    def getResourceByCategory(self, r_category):
             cursor = self.conn.cursor()
             query = "select * from resource where r_category = %s;"
-            cursor.execute(query, (r_id,))
+            cursor.execute(query, (r_category,))
             result = []
             for row in cursor:
                 result.append(row)
             return result
+
+    def getResourceByName(self, r_name):
+            cursor = self.conn.cursor()
+            query = "select * from resource where r_category = %s;"
+            cursor.execute(query, (r_name,))
+            result = []
+            for row in cursor:
+                result.append(row)
+            return result
+
+    def getResourceByCategoryAndName(self,r_category, r_name):
+        cursor = self.conn.cursor()
+        query = "select * from resource where r_category = %s and r_name = %s;"
+        cursor.execute(query, (r_category, r_name,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
 
     def getUserSuppliersByResourceId(self, r_id):
         cursor = self.conn.cursor()

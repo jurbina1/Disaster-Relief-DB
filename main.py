@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from handler.resource import ResourceHandler
 from handler.buyer import BuyerHandler
+from handler.seller import SellerHandler
 
 app = Flask(__name__)
 
@@ -28,7 +29,6 @@ def getBuyersByResourceId(r_id):
     return ResourceHandler().getBuyersByResourceId(r_id)
 
 
-
 @app.route('/DisasterApp/buyers')
 def getAllBuyers():
     if not request.args:
@@ -36,13 +36,28 @@ def getAllBuyers():
     else:
         return BuyerHandler().searchBuyers(request.args)
 
-@app.route('/DisasterApp/buyers/<int:sid>')
-def getBuyerById(sid):
-    return BuyerHandler().getBuyerById(sid)
+@app.route('/DisasterApp/buyers/<int:b_id>')
+def getBuyerById(b_id):
+    return BuyerHandler().getBuyerById(b_id)
 
 @app.route('/DisasterApp/buyers/<int:sid>/requests')
-def getResourcesByBuyerId(sid):
-    return BuyerHandler().getResourcesByBuyerId(sid)
+def getResourcesByBuyerId(b_id):
+    return BuyerHandler().getResourcesByBuyerId(b_id)
+
+@app.route('/DisasterApp/sellers')
+def getAllSellers():
+    if not request.args:
+        return SellerHandler().getAllSellers()
+    else:
+        return SellerHandler().searchSeller(request.args)
+
+@app.route('/Disaster/sellers/<int:s_id>')
+def getSellerById(s_id):
+    return SellerHandler().getSupplierById(s_id)
+
+@app.route('/DisasterApp/sellers/<int:s_id>/announcements')
+def getResourcesBySellerId(s_id):
+    return SellerHandler().getResourcesBySellerId(s_id)
 
 if __name__=='__main__':
     app.run()

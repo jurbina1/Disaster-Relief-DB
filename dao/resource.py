@@ -46,7 +46,7 @@ class ResourceDAO:
     def getResourceByCategoryAndName(self,r_category, r_name):
         cursor = self.conn.cursor()
         query = "select * from resource where r_category = %s and r_name = %s;"
-        cursor.execute(query, (r_category, r_name,))
+        cursor.execute(query, (r_category, r_name))
         result = []
         for row in cursor:
             result.append(row)
@@ -54,7 +54,7 @@ class ResourceDAO:
 
     def getSellerByResourceId(self, r_id):
         cursor = self.conn.cursor()
-        query = "select u_id, u_name, u_lastname, u_email, u_region, u_phone, u_age from user natural inner join supplier natural inner join resource where r_id = %s;"
+        query = "select u_id, u_name, u_lastname, u_email, u_region, u_phone, u_age from user natural inner join seller natural inner join resource natural inner join annoucements where r_id = %s;"
         cursor.execute(query, (r_id,))
         result = []
         for row in cursor:
@@ -63,7 +63,7 @@ class ResourceDAO:
 
     def getBuyerByResourceId(self, r_id):
         cursor = self.conn.cursor()
-        query = "select u_id, u_name, u_lastname, u_email, u_region, u_phone, u_age from user natural inner join consumer natural inner join resource where r_id = %s;"
+        query = "select u_id, u_name, u_lastname, u_email, u_region, u_phone, u_age from user natural inner join buyer natural inner join resource natural inner join requests where r_id = %s;"
         cursor.execute(query, (r_id,))
         result = []
         for row in cursor:

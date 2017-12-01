@@ -57,7 +57,7 @@ class BuyerHandler:
                 result_list.append(result)
             return jsonify(Resources=result_list)
 
-    def searchBuyer(self, args):
+    def searchBuyers(self, args):
         name = args.get("name")
         lastname = args.get("lastname")
         region = args.get("region")

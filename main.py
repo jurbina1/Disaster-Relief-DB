@@ -20,7 +20,7 @@ def getAllResources():
 def getResourcesById(sid):
     return ResourceHandler().getResourceById(sid)
 
-@app.route('/DisasterApp/resources/<int:r_id>/supplies')
+@app.route('/DisasterApp/resources/<int:r_id>/sellers')
 def getSellersByResourceId(r_id):
     return ResourceHandler().getSellersByResourceId(r_id)
 
@@ -40,7 +40,7 @@ def getAllBuyers():
 def getBuyerById(b_id):
     return BuyerHandler().getBuyerById(b_id)
 
-@app.route('/DisasterApp/buyers/<int:sid>/requests')
+@app.route('/DisasterApp/buyers/<int:b_id>/requests')
 def getResourcesByBuyerId(b_id):
     return BuyerHandler().getResourcesByBuyerId(b_id)
 
@@ -53,7 +53,7 @@ def getAllSellers():
 
 @app.route('/Disaster/sellers/<int:s_id>')
 def getSellerById(s_id):
-    return SellerHandler().getSupplierById(s_id)
+    return SellerHandler().getSellerById(s_id)
 
 @app.route('/DisasterApp/sellers/<int:s_id>/announcements')
 def getResourcesBySellerId(s_id):

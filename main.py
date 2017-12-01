@@ -9,7 +9,7 @@ def home():
     return 'Disaster Relief'
 
 @app.route('/DisasterApp/resources')
-def getAllSuppliers():
+def getAllResources():
     if not request.args:
         return ResourceHandler().getAllResources()
     else:

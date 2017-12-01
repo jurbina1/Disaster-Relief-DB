@@ -64,17 +64,17 @@ class SellerHandler:
         if name and lastname and region:
             seller_list = dao.getSellerByRegionNameAndLastName(region, name,lastname)
         elif name and lastname:
-            seller_list = dao.getResourceByNameandLastName(name, lastname)
+            seller_list = dao.getSellerByNameandLastName(name, lastname)
         elif name and region:
-            seller_list = dao.getResourceByNameandRegion(name, region)
+            seller_list = dao.getSellerByNameandRegion(name, region)
         elif lastname and region:
-            seller_list = dao.getResourceByLastNameandRegion(lastname, region)
+            seller_list = dao.getSellerByLastNameandRegion(lastname, region)
         elif name:
-            seller_list = dao.getResourceByName(name)
+            seller_list = dao.getSellerByName(name)
         elif lastname:
-            seller_list = dao.getResourceByLastName(lastname)
+            seller_list = dao.getSellerByLastName(lastname)
         elif region:
-            seller_list = dao.getResourceByRegion(region)
+            seller_list = dao.getSellerByRegion(region)
         else:
             return jsonify(Error = "Malformed query string"), 400
         if not seller_list:

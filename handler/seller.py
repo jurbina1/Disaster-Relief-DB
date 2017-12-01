@@ -22,6 +22,7 @@ class SellerHandler:
         result['r_name'] = row[2]
         result['a_qty'] = row[3]
         result['a_price'] = row[4]
+        result['a_date'] = row[5]
         return result
 
     def getAllSellers(self):
@@ -32,11 +33,11 @@ class SellerHandler:
         else:
             result_list = []
             for row in seller_list:
-                result = self.build_resource_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
-            return jsonify(Resources=result_list)
+            return jsonify(Sellers=result_list)
 
-    def getSupplierById(self, s_id):
+    def getSellerById(self, s_id):
         dao = SellerDAO()
         row = dao.getSellerById(s_id)
         if not row:
@@ -84,6 +85,6 @@ class SellerHandler:
         else:
             result_list = []
             for row in seller_list:
-                result = self.build_resource_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
-            return jsonify(Resources=result_list)
+            return jsonify(Sellers=result_list)

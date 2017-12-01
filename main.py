@@ -20,11 +20,11 @@ def getSupplierById(sid):
 
 @app.route('/DisasterApp/resources/<int:r_id>/supplies')
 def getPartsBySuplierId(r_id):
-    return ResourceHandler().getSellersByResourcesId(r_id)
+    return ResourceHandler().getSellersByResourceId(r_id)
 
 @app.route('/DisasterApp/resources/<int:r_id>/buyers')
 def getPartsBySuplierId(r_id):
-    return ResourceHandler().getBuyersByResourcesId(r_id)
+    return ResourceHandler().getBuyersByResourceId(r_id)
 
 if __name__=='__main__':
     app.run()

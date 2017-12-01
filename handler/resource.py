@@ -60,7 +60,7 @@ class ResourceHandler:
             result_list.append(result)
         return jsonify(Resources=result_list)
 
-    def getSellerByResourceId(self, r_id):
+    def getSellersByResourceId(self, r_id):
         dao = ResourceDAO()
         users_list = dao.getSellerByResourceId(r_id)
         if not users_list:
@@ -72,7 +72,7 @@ class ResourceHandler:
                 result_list.append(result)
             return jsonify(Users=result_list)
 
-    def getBuyerByResourceId(self, r_id):
+    def getBuyersByResourceId(self, r_id):
         dao = ResourceDAO()
         users_list = dao.getBuyerByResourceId(r_id)
         if not users_list:

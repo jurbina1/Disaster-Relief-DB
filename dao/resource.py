@@ -52,7 +52,7 @@ class ResourceDAO:
             result.append(row)
         return result
 
-    def getUserSuppliersByResourceId(self, r_id):
+    def getSellerByResourceId(self, r_id):
         cursor = self.conn.cursor()
         query = "select u_id, u_name, u_lastname, u_email, u_region, u_phone, u_age from user natural inner join supplier natural inner join resource where r_id = %s;"
         cursor.execute(query, (r_id,))
@@ -61,7 +61,7 @@ class ResourceDAO:
             result.append(row)
         return result
 
-    def getUserConsumersByResourceId(self, r_id):
+    def getBuyerByResourceId(self, r_id):
         cursor = self.conn.cursor()
         query = "select u_id, u_name, u_lastname, u_email, u_region, u_phone, u_age from user natural inner join consumer natural inner join resource where r_id = %s;"
         cursor.execute(query, (r_id,))

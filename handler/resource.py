@@ -41,7 +41,7 @@ class ResourceHandler:
             resource = self.build_resource_dict(row)
         return jsonify(Resource=resource)
 
-    def searchResources(self, args):
+    def searchResource(self, args):
         category = args.get("category")
         name = args.get("name")
         dao = ResourceDAO()
@@ -60,9 +60,9 @@ class ResourceHandler:
             result_list.append(result)
         return jsonify(Resources=result_list)
 
-    def getUserSuppliersByResourceId(self, r_id):
+    def getSellerByResourceId(self, r_id):
         dao = ResourceDAO()
-        users_list = dao.getUserSuppliersByResourceId(r_id)
+        users_list = dao.getSellerByResourceId(r_id)
         if not users_list:
             return jsonify(Error="Resource Not Found"), 404
         else:
@@ -72,9 +72,9 @@ class ResourceHandler:
                 result_list.append(result)
             return jsonify(Users=result_list)
 
-    def getUserConsumersByResourceId(self, r_id):
+    def getBuyerByResourceId(self, r_id):
         dao = ResourceDAO()
-        users_list = dao.getUserConsumersByResourceId(r_id)
+        users_list = dao.getBuyerByResourceId(r_id)
         if not users_list:
             return jsonify(Error="Resource Not Found"), 404
         else:

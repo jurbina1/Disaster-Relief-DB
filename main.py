@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from handler.resource import ResourceHandler
 
 app = Flask(__name__)
@@ -20,11 +20,11 @@ def getSupplierById(sid):
 
 @app.route('/DisasterApp/resources/<int:r_id>/supplies')
 def getPartsBySuplierId(r_id):
-    return ResourceHandler().getUserSuppliersByResourcesId(r_id)
+    return ResourceHandler().getSellersByResourcesId(r_id)
 
-@app.route('/DisasterApp/resources/<int:r_id>/needs')
+@app.route('/DisasterApp/resources/<int:r_id>/buyers')
 def getPartsBySuplierId(r_id):
-    return ResourceHandler().getUserConsumersByResourcesId(r_id)
+    return ResourceHandler().getBuyersByResourcesId(r_id)
 
 if __name__=='__main__':
     app.run()

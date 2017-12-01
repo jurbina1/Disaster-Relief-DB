@@ -24,12 +24,15 @@ class SellerHandler:
 
     def getAllSellers(self):
         dao = SellerDAO()
-        sellers_list = dao.getAllSellers()
-        result_list = []
-        for row in sellers_list:
-            result = self.build_seller_dict(row)
-            result_list.append(result)
-        return jsonify(Sellers=result_list)
+        seller_list = dao.getAllSellers()
+        if not seller_list:
+            return jsonify(Error="Seller Not Found"), 404
+        else:
+            result_list = []
+            for row in seller_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+            return jsonify(Resources=result_list)
 
     def getSupplierById(self, s_id):
         dao = SellerDAO()
@@ -42,12 +45,43 @@ class SellerHandler:
 
     def getResourcesBySellerId(self, s_id):
         dao = SellerDAO()
-        resource_list = dao.getResourcesBySellerId(s_id)
-        if not resource_list:
+        seller_list = dao.getResourcesBySellerId(s_id)
+        if not seller_list:
             return jsonify(Error="Seller Not Found"), 404
         else:
             result_list = []
-            for row in resource_list:
+            for row in seller_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+            return jsonify(Resources=result_list)
+
+    def searchSeller(self, args):
+        name = args.get("name")
+        lastname = args.get("lastname")
+        region = args.get("region")
+        dao = SellerDAO()
+        seller_list = []
+        if name and lastname and region:
+            seller_list = dao.getSellerByRegionNameAndLastName(region, name,lastname)
+        elif name and lastname:
+            seller_list = dao.getResourceByNameandLastName(name, lastname)
+        elif name and region:
+            seller_list = dao.getResourceByNameandRegion(name, region)
+        elif lastname and region:
+            seller_list = dao.getResourceByLastNameandRegion(lastname, region)
+        elif name:
+            seller_list = dao.getResourceByName(name)
+        elif lastname:
+            seller_list = dao.getResourceByLastName(lastname)
+        elif region:
+            seller_list = dao.getResourceByRegion(region)
+        else:
+            return jsonify(Error = "Malformed query string"), 400
+        if not seller_list:
+            return jsonify(Error="Seller Not Found"), 404
+        else:
+            result_list = []
+            for row in seller_list:
                 result = self.build_resource_dict(row)
                 result_list.append(result)
             return jsonify(Resources=result_list)

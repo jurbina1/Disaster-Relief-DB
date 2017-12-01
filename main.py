@@ -8,22 +8,22 @@ def home():
     return 'Disaster Relief'
 
 @app.route('/DisasterApp/resources')
-def getAllSuppliers():
+def getAllResources():
     if not request.args:
         return ResourceHandler().getAllResources()
     else:
         return ResourceHandler().searchResource(request.args)
 
 @app.route('/DisasterApp/resources/<int:r_id>')
-def getSupplierById(sid):
+def getResourceById(sid):
     return ResourceHandler().getResourceById(sid)
 
 @app.route('/DisasterApp/resources/<int:r_id>/supplies')
-def getPartsBySuplierId(r_id):
+def getSellersByResourceId(r_id):
     return ResourceHandler().getSellersByResourceId(r_id)
 
 @app.route('/DisasterApp/resources/<int:r_id>/buyers')
-def getPartsBySuplierId(r_id):
+def getBuyersByResourcesId(r_id):
     return ResourceHandler().getBuyersByResourceId(r_id)
 
 if __name__=='__main__':

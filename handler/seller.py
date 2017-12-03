@@ -43,8 +43,8 @@ class SellerHandler:
         if not row:
             return jsonify(Error="Seller Not Found"), 404
         else:
-            part = self.build_seller_dict(row)
-        return jsonify(Seller=part)
+            seller = self.build_seller_dict(row)
+        return jsonify(Seller=seller)
 
     def getResourcesBySellerId(self, s_id):
         dao = SellerDAO()

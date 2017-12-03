@@ -79,4 +79,3 @@ class BankAccountHandler:
                 result = self.build_bankaccount_dict(row)
                 result_list.append(result)
             return jsonify(Bank_Accounts=result_list)
-

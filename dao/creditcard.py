@@ -59,4 +59,3 @@ class CreditCardDAO:
             result.append(row)
         return result
     
-    

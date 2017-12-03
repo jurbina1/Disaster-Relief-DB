@@ -115,4 +115,3 @@ class TransactionHandler:
                 result = self.build_transaction_dict(row)
                 result_list.append(result)
             return jsonify(Transactions=result_list)
-

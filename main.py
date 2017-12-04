@@ -22,8 +22,8 @@ def getAllResources():
         return ResourceHandler().searchResource(request.args)
 
 @app.route('/DisasterApp/resources/<int:r_id>')
-def getResourceById(sid):
-    return ResourceHandler().getResourceById(sid)
+def getResourceById(r_id):
+    return ResourceHandler().getResourceById(r_id)
 
 @app.route('/DisasterApp/resources/<int:r_id>/sellers')
 def getSellersByResourceId(r_id):
@@ -62,7 +62,7 @@ def getAllSellers():
     else:
         return SellerHandler().searchSeller(request.args)
 
-@app.route('/Disaster/sellers/<int:s_id>')
+@app.route('/DisasterApp/sellers/<int:s_id>')
 def getSellerById(s_id):
     return SellerHandler().getSellerById(s_id)
 
@@ -80,7 +80,7 @@ def getAllAnnouncements():
     else:
         return AnnouncementHandler().searchAnnouncement(request.args)
 
-@app.route('/Disaster/announcements/<int:a_id>')
+@app.route('/DisasterApp/announcements/<int:a_id>')
 def getAnnouncementById(a_id):
     return AnnouncementHandler().getAnnouncementById(a_id)
 
@@ -89,7 +89,7 @@ def getResourcesByAnnouncementId(a_id):
     return AnnouncementHandler().getResourcesByAnnouncementId(a_id)
 
 @app.route('/DisasterApp/announcements/<int:a_id>/seller')
-def getResourcesByAnnouncementId(a_id):
+def getSellerByAnnouncementId(a_id):
     return AnnouncementHandler().getSellerByAnnouncementId(a_id)
 
 
@@ -102,16 +102,16 @@ def getAllRequests():
     else:
         return RequestHandler().searchRequest(request.args)
 
-@app.route('/Disaster/requests/<int:rq_id>')
-def getAnnouncementById(rq_id):
+@app.route('/DisasterApp/requests/<int:rq_id>')
+def getRequestById(rq_id):
     return RequestHandler().getRequestById(rq_id)
 
 @app.route('/DisasterApp/requests/<int:rq_id>/resource')
-def getResourcesByAnnouncementId(rq_id):
+def getResourcesByRequestId(rq_id):
     return RequestHandler().getResourcesByRequestId(rq_id)
 
 @app.route('/DisasterApp/requests/<int:rq_id>/buyer')
-def getResourcesByAnnouncementId(rq_id):
+def getBuyerByRequestId(rq_id):
     return RequestHandler().getBuyerByRequestId(rq_id)
 
 
@@ -124,12 +124,12 @@ def getAllBankAccounts():
     else:
         return BankAccountHandler().searchBankAccounts(request.args)
 
-@app.route('/Disaster/bankaccounts/<int:ba_id>')
+@app.route('/DisasterApp/bankaccounts/<int:ba_id>')
 def getBankAccountById(ba_id):
     return BankAccountHandler().getBankAccountById(ba_id)
 
 @app.route('/DisasterApp/bankaccounts/<int:ba_id>/seller')
-def getResourcesByAnnouncementId(ba_id):
+def getSellerByBankAccountId(ba_id):
     return BankAccountHandler().getSellerByBankAccountId(ba_id)
 
 
@@ -142,7 +142,7 @@ def getAllCreditCards():
     else:
         return CreditCardHandler().searchCreditCards(request.args)
 
-@app.route('/Disaster/creditcard/<int:c_id>')
+@app.route('/DisasterApp/creditcard/<int:c_id>')
 def getCreditCardById(c_id):
     return CreditCardHandler().getCreditCardById(c_id)
 
@@ -160,7 +160,7 @@ def getAllTransactions():
     else:
         return TransactionHandler().searchTransactions(request.args)
 
-@app.route('/Disaster/transactions/<int:t_id>')
+@app.route('/DisasterApp/transactions/<int:t_id>')
 def getTransactionById(t_id):
     return TransactionHandler().getTransactionById(t_id)
 

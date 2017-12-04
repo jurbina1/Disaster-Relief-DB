@@ -55,9 +55,9 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = self.build_transaction_dict(row)
+                result = []#self.build_transaction_dict(row)
                 result_list.append(result)
-            return jsonify(Transactions=result_list)
+            return jsonify(Transactions=transaction_list)
 
     def getTransactionById(self, t_id):
         dao = TransactionDAO()
@@ -67,9 +67,9 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = self.build_transaction_dict(row)
+                result = []#self.build_transaction_dict(row)
                 result_list.append(result)
-        return jsonify(Transaction=result_list)
+        return jsonify(Transaction=transaction_list)
 
     def getResourcesByTransactionId(self, t_id):
         dao = TransactionDAO()
@@ -79,9 +79,9 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = self.build_resource_dict(row)
+                result = []#self.build_resource_dict(row)
                 result_list.append(result)
-        return jsonify(Resource=result_list)
+        return jsonify(Resource=transaction_list)
 
 
     def getBuyerByTransactionId(self, t_id):
@@ -92,9 +92,9 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = self.build_buyer_dict(row)
+                result = []#self.build_buyer_dict(row)
                 result_list.append(result)
-        return jsonify(Buyer=result_list)
+        return jsonify(Buyer=transaction_list)
 
     def getSellerByTransactionId(self, t_id):
         dao = TransactionDAO()
@@ -104,9 +104,9 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = self.build_seller_dict(row)
+                result = []#self.build_seller_dict(row)
                 result_list.append(result)
-        return jsonify(Seller=result_list)
+        return jsonify(Seller=transaction_list)
 
     def searchTransactions(self, args):
         s_id = args.get("s_id")
@@ -135,7 +135,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = self.build_transaction_dict(row)
+                result = []#self.build_transaction_dict(row)
                 result_list.append(result)
-            return jsonify(Transactions=result_list)
+        return jsonify(Transactions=transaction_list)
 

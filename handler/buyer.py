@@ -32,9 +32,9 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = self.build_buyer_dict(row)
+                result = []#self.build_buyer_dict(row)
                 result_list.append(result)
-            return jsonify(Buyers=result_list)
+            return jsonify(Buyers=buyer_list)
 
     def getBuyerById(self, b_id):
         dao = BuyerDAO()
@@ -44,9 +44,9 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = self.build_buyer_dict(row)
+                result = []#self.build_buyer_dict(row)
                 result_list.append(result)
-        return jsonify(Buyer=result_list)
+        return jsonify(Buyer=buyer_list)
 
     def getResourcesByBuyerId(self, b_id):
         dao = BuyerDAO()
@@ -56,9 +56,9 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = self.build_resource_dict(row)
+                result = []#self.build_resource_dict(row)
                 result_list.append(result)
-            return jsonify(Resources=result_list)
+            return jsonify(Resources=buyer_list)
 
     def searchBuyers(self, args):
         name = args.get("name")
@@ -87,6 +87,6 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = self.build_buyer_dict(row)
+                result = []#self.build_buyer_dict(row)
                 result_list.append(result)
-            return jsonify(Buyers=result_list)
+            return jsonify(Buyers=buyer_list)

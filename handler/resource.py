@@ -27,9 +27,9 @@ class ResourceHandler:
         resources_list = dao.getAllResources()
         result_list = []
         for row in resources_list:
-            result = self.build_resource_dict(row)
+            result = []#self.build_resource_dict(row)
             result_list.append(result)
-        return jsonify(records=result_list)
+        return jsonify(records=resources_list)
 
     def getResourceById(self, r_id):
         dao = ResourceDAO()
@@ -39,9 +39,9 @@ class ResourceHandler:
         else:
             result_list = []
             for row in resources_list:
-                result = self.build_resource_dict(row)
+                result = []#self.build_resource_dict(row)
                 result_list.append(result)
-        return jsonify(Resource=result_list)
+        return jsonify(Resource=resources_list)
 
     def searchResource(self, args):
         category = args.get("category")
@@ -58,9 +58,9 @@ class ResourceHandler:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in resources_list:
-            result = self.build_resource_dict(row)
+            result = []#self.build_resource_dict(row)
             result_list.append(result)
-        return jsonify(Resources=result_list)
+        return jsonify(Resources=resources_list)
 
     def getSellersByResourceId(self, r_id):
         dao = ResourceDAO()
@@ -70,9 +70,9 @@ class ResourceHandler:
         else:
             result_list = []
             for row in users_list:
-                result = self.build_user_dict(row)
+                result = []#self.build_user_dict(row)
                 result_list.append(result)
-            return jsonify(Users=result_list)
+            return jsonify(Users=users_list)
 
     def getBuyersByResourceId(self, r_id):
         dao = ResourceDAO()
@@ -82,6 +82,6 @@ class ResourceHandler:
         else:
             result_list = []
             for row in users_list:
-                result = self.build_user_dict(row)
+                result = []#self.build_user_dict(row)
                 result_list.append(result)
-            return jsonify(Users=result_list)
+            return jsonify(Users=users_list)

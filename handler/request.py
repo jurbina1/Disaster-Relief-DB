@@ -40,9 +40,9 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = self.build_request_dict(row)
+                result = []#self.build_request_dict(row)
                 result_list.append(result)
-            return jsonify(Requests=result_list)
+            return jsonify(Requests=request_list)
 
     def getRequestById(self, rq_id):
         dao = RequestDAO()
@@ -52,9 +52,9 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = self.build_request_dict(row)
+                result = []#self.build_request_dict(row)
                 result_list.append(result)
-        return jsonify(Request=result_list)
+        return jsonify(Request=request_list)
 
     def getResourcesByRequestId(self, rq_id):
         dao = RequestDAO()
@@ -64,9 +64,9 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = self.build_resource_dict(row)
+                result = []#self.build_resource_dict(row)
                 result_list.append(result)
-        return jsonify(Resource=result_list)
+        return jsonify(Resource=request_list)
 
     def getBuyerByRequestId(self, rq_id):
         dao = RequestDAO()
@@ -76,9 +76,9 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = self.build_buyer_dict(row)
+                result = []#self.build_buyer_dict(row)
                 result_list.append(result)
-        return jsonify(Buyer=result_list)
+        return jsonify(Buyer=request_list)
 
     def searchRequest(self, args):
         b_id = args.get("b_id")
@@ -107,6 +107,6 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = self.build_request_dict(row)
+                result = []#self.build_request_dict(row)
                 result_list.append(result)
-            return jsonify(Requests=result_list)
+            return jsonify(Requests=request_list)

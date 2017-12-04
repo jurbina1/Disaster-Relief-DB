@@ -32,9 +32,9 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = self.build_bankaccount_dict(row)
+                result = []#self.build_bankaccount_dict(row)
                 result_list.append(result)
-            return jsonify(Bank_Accounts=result_list)
+            return jsonify(Bank_Accounts=bankaccount_list)
 
     def getBankAccountById(self, ba_id):
         dao = BankAccountDAO()
@@ -44,9 +44,9 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = self.build_bankaccount_dict(row)
+                result = []#self.build_bankaccount_dict(row)
                 result_list.append(result)
-        return jsonify(Bank_Account=result_list)
+        return jsonify(Bank_Account=bankaccount_list)
 
     def getSellerByBankAccountId(self, ba_id):
         dao = BankAccountDAO()
@@ -56,9 +56,9 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = self.build_user_dict(row)
+                result = []#self.build_user_dict(row)
                 result_list.append(result)
-        return jsonify(Seller = result_list)
+        return jsonify(Seller = bankaccount_list)
 
 
     def searchBankAccounts(self, args):
@@ -79,6 +79,6 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = self.build_bankaccount_dict(row)
+                result = []#self.build_bankaccount_dict(row)
                 result_list.append(result)
-            return jsonify(Bank_Accounts=result_list)
+            return jsonify(Bank_Accounts=bankaccount_list)

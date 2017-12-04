@@ -14,7 +14,7 @@ class AnnouncementHandler:
         result['a_available'] = row[6]
         result['a_totalresources'] = row[7]
         result['a_date'] = row[8]
-        result['a_region'] = row[9]
+
         return result
 
     def build_resource_dict(self, row):
@@ -22,7 +22,6 @@ class AnnouncementHandler:
         result['r_id'] = row[0]
         result['r_category'] = row[1]
         result['r_name'] = row[2]
-        result['r_description'] = row[3]
         return result
 
     def build_seller_dict(self, row):

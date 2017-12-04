@@ -9,7 +9,6 @@ class RequestHandler:
         result['b_id'] = row[1]
         result['r_id'] = row[2]
         result['rq_qty'] = row[3]
-        result['rq_region'] = row[4]
         result['rq_date'] = row[5]
         result['rq_fulfillment'] = row[6]
         return result
@@ -19,7 +18,6 @@ class RequestHandler:
         result['r_id'] = row[0]
         result['r_category'] = row[1]
         result['r_name'] = row[2]
-        result['r_description'] = row[3]
         return result
 
     def build_buyer_dict(self, row):

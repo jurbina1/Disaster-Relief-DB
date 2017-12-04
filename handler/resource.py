@@ -8,7 +8,6 @@ class ResourceHandler:
         result['r_id'] = row[0]
         result['r_category'] = row[1]
         result['r_name'] = row[2]
-        result['r_description'] = row[3]
         return result
 
     def build_user_dict(self, row):

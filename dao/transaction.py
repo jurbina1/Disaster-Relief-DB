@@ -40,7 +40,7 @@ class TransactionDAO:
         #query = "select * from transaction;"
         #cursor.execute(query)
         result = []
-        for row in self.result: #cursor
+        for row in self.result(): #cursor
             result.append(row)
         return result
 

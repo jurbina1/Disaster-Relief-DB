@@ -135,18 +135,18 @@ def getSellerByBankAccountId(ba_id):
 
 
 
-@app.route('/DisasterApp/creditcard')
+@app.route('/DisasterApp/creditcards')
 def getAllCreditCards():
     if not request.args:
         return CreditCardHandler().getAllCreditCards()
     else:
         return CreditCardHandler().searchCreditCards(request.args)
 
-@app.route('/DisasterApp/creditcard/<int:c_id>')
+@app.route('/DisasterApp/creditcards/<int:c_id>')
 def getCreditCardById(c_id):
     return CreditCardHandler().getCreditCardById(c_id)
 
-@app.route('/DisasterApp/creditcard/<int:c_id>/buyer')
+@app.route('/DisasterApp/creditcards/<int:c_id>/buyer')
 def getBuyerByCreditCardId(c_id):
     return CreditCardHandler().getBuyerByCreditCardId(c_id)
 

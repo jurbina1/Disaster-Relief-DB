@@ -29,7 +29,7 @@ class ResourceHandler:
         for row in resources_list:
             result = []#self.build_resource_dict(row)
             result_list.append(result)
-        return jsonify(records=resources_list)
+        return jsonify(Resources=resources_list)
 
     def getResourceById(self, r_id):
         dao = ResourceDAO()

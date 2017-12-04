@@ -38,21 +38,27 @@ class BankAccountHandler:
 
     def getBankAccountById(self, ba_id):
         dao = BankAccountDAO()
-        row = dao.getBankAccountById(ba_id)
-        if not row:
+        bankaccount_list = dao.getBankAccountById(ba_id)
+        if not bankaccount_list:
             return jsonify(Error="Bank Account Not Found"), 404
         else:
-            bankaccount = self.build_bankaccount_dict(row)
-        return jsonify(Bank_Account=bankaccount)
+            result_list = []
+            for row in bankaccount_list:
+                result = self.build_bankaccount_dict(row)
+                result_list.append(result)
+        return jsonify(Bank_Account=result_list)
 
     def getSellerByBankAccountId(self, ba_id):
         dao = BankAccountDAO()
-        row = dao.getSellerByBankAccountId(ba_id)
-        if not row:
+        bankaccount_list = dao.getSellerByBankAccountId(ba_id)
+        if not bankaccount_list:
             return jsonify(Error="Bank Account Not Found"), 404
         else:
-            result = self.build_user_dict(row)
-        return jsonify(Seller = result)
+            result_list = []
+            for row in bankaccount_list:
+                result = self.build_user_dict(row)
+                result_list.append(result)
+        return jsonify(Seller = result_list)
 
 
     def searchBankAccounts(self, args):

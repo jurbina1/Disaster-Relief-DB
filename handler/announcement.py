@@ -50,30 +50,39 @@ class AnnouncementHandler:
 
     def getAnnouncementById(self, a_id):
         dao = AnnouncementDAO()
-        row = dao.getAnnouncementById(a_id)
-        if not row:
+        announcement_list = dao.getAnnouncementById(a_id)
+        if not announcement_list:
             return jsonify(Error="Announcement Not Found"), 404
         else:
-            result = self.build_announcement_dict(row)
-        return jsonify(Announcement=result)
+            result_list = []
+            for row in announcement_list:
+                result = self.build_announcement_dict(row)
+                result_list.append(result)
+        return jsonify(Announcement=result_list)
 
     def getResourcesByAnnouncementId(self, a_id):
         dao = AnnouncementDAO()
-        row = dao.getResourcesByAnnouncementId(a_id)
-        if not row:
+        announcement_list = dao.getResourcesByAnnouncementId(a_id)
+        if not announcement_list:
             return jsonify(Error="Announcement Not Found"), 404
         else:
-            result = self.build_resource_dict(row)
-        return jsonify(Resource=result)
-        
+            result_list = []
+            for row in announcement_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+        return jsonify(Resource=result_list)
+
     def getSellerByAnnouncementId(self, a_id):
         dao = AnnouncementDAO()
-        row = dao.getSellerByAnnouncementId(a_id)
-        if not row:
+        announcement_list = dao.getSellerByAnnouncementId(a_id)
+        if not announcement_list:
             return jsonify(Error="Announcement Not Found"), 404
         else:
-            result = self.build_seller_dict(row)
-        return jsonify(Seller=result)
+            result_list = []
+            for row in announcement_list:
+                result = self.build_seller_dict(row)
+                result_list.append(result)
+        return jsonify(Seller=result_list)
 
     def searchAnnouncement(self, args):
         s_id = args.get("s_id")

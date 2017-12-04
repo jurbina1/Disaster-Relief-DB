@@ -61,40 +61,52 @@ class TransactionHandler:
 
     def getTransactionById(self, t_id):
         dao = TransactionDAO()
-        row = dao.getTransactionById(t_id)
-        if not row:
+        transaction_list = dao.getTransactionById(t_id)
+        if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            transaction = self.build_transaction_dict(row)
-        return jsonify(Transaction=transaction)
+            result_list = []
+            for row in transaction_list:
+                result = self.build_transaction_dict(row)
+                result_list.append(result)
+        return jsonify(Transaction=result_list)
 
     def getResourcesByTransactionId(self, t_id):
         dao = TransactionDAO()
-        row = dao.getResourceByTransactionId(t_id)
-        if not row:
+        transaction_list = dao.getResourceByTransactionId(t_id)
+        if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result = self.build_resource_dict(row)
-        return jsonify(Resource=result)
+            result_list = []
+            for row in transaction_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+        return jsonify(Resource=result_list)
 
 
     def getBuyerByTransactionId(self, t_id):
         dao = TransactionDAO()
-        row = dao.getBuyerByTransactionId(t_id)
-        if not row:
+        transaction_list = dao.getBuyerByTransactionId(t_id)
+        if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result = self.build_buyer_dict(row)
-        return jsonify(Buyer=result)
+            result_list = []
+            for row in transaction_list:
+                result = self.build_buyer_dict(row)
+                result_list.append(result)
+        return jsonify(Buyer=result_list)
 
     def getSellerByTransactionId(self, t_id):
         dao = TransactionDAO()
-        row = dao.getSellerByTransactionId(t_id)
-        if not row:
+        transaction_list = dao.getSellerByTransactionId(t_id)
+        if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result = self.build_seller_dict(row)
-        return jsonify(Sellerr=result)
+            result_list = []
+            for row in transaction_list:
+                result = self.build_seller_dict(row)
+                result_list.append(result)
+        return jsonify(Seller=result_list)
 
     def searchTransactions(self, args):
         s_id = args.get("s_id")

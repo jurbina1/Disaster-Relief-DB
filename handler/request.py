@@ -46,30 +46,39 @@ class RequestHandler:
 
     def getRequestById(self, rq_id):
         dao = RequestDAO()
-        row = dao.getRequestById(rq_id)
-        if not row:
+        request_list = dao.getRequestById(rq_id)
+        if not request_list:
             return jsonify(Error="Request Not Found"), 404
         else:
-            result = self.build_request_dict(row)
-        return jsonify(Request=result)
+            result_list = []
+            for row in request_list:
+                result = self.build_request_dict(row)
+                result_list.append(result)
+        return jsonify(Request=result_list)
 
     def getResourcesByRequestId(self, rq_id):
         dao = RequestDAO()
-        row = dao.getResourcesByRequestId(rq_id)
-        if not row:
+        request_list = dao.getResourcesByRequestId(rq_id)
+        if not request_list:
             return jsonify(Error="Request Not Found"), 404
         else:
-            result = self.build_resource_dict(row)
-        return jsonify(Resource=result)
+            result_list = []
+            for row in request_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+        return jsonify(Resource=result_list)
 
     def getBuyerByRequestId(self, rq_id):
         dao = RequestDAO()
-        row = dao.getBuyerByRequestId(rq_id)
-        if not row:
+        request_list = dao.getBuyerByRequestId(rq_id)
+        if not request_list:
             return jsonify(Error="Request Not Found"), 404
         else:
-            result = self.build_buyer_dict(row)
-        return jsonify(Buyer=result)
+            result_list = []
+            for row in request_list:
+                result = self.build_buyer_dict(row)
+                result_list.append(result)
+        return jsonify(Buyer=result_list)
 
     def searchRequest(self, args):
         b_id = args.get("b_id")

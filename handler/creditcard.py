@@ -39,21 +39,27 @@ class CreditCardHandler:
 
     def getCreditCardById(self, c_id):
         dao = CreditCardDAO()
-        row = dao.getCreditCardById(c_id)
-        if not row:
+        creditcard_list = dao.getCreditCardById(c_id)
+        if not creditcard_list:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            credit_card = self.build_creditcard_dict(row)
-        return jsonify(Credit_Card=credit_card)
+            result_list = []
+            for row in creditcard_list:
+                result = self.build_creditcard_dict(row)
+                result_list.append(result)
+        return jsonify(Credit_Card=result_list)
 
     def getBuyerByCreditCardId(self, c_id):
         dao = CreditCardDAO()
-        row = dao.getCreditCardById(c_id)
-        if not row:
+        creditcard_list = dao.getCreditCardById(c_id)
+        if not creditcard_list:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            result = self.build_user_dict(row)
-        return jsonify(Buyer=result)
+            result_list = []
+            for row in creditcard_list:
+                result = self.build_user_dict(row)
+                result_list.append(result)
+        return jsonify(Buyer=result_list)
 
     def searchCreditCards(self, args):
         name = args.get("name")

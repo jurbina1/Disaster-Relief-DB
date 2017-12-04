@@ -39,12 +39,15 @@ class SellerHandler:
 
     def getSellerById(self, s_id):
         dao = SellerDAO()
-        row = dao.getSellerById(s_id)
-        if not row:
+        seller_list = dao.getSellerById(s_id)
+        if not seller_list:
             return jsonify(Error="Seller Not Found"), 404
         else:
-            seller = self.build_seller_dict(row)
-        return jsonify(Seller=seller)
+            result_list = []
+            for row in seller_list:
+                result = self.build_seller_dict(row)
+                result_list.append(result)
+        return jsonify(Seller=result_list)
 
     def getResourcesBySellerId(self, s_id):
         dao = SellerDAO()

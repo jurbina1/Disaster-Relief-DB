@@ -38,12 +38,15 @@ class BuyerHandler:
 
     def getBuyerById(self, b_id):
         dao = BuyerDAO()
-        row = dao.getBuyerById(b_id)
-        if not row:
+        buyer_list = dao.getBuyerById(b_id)
+        if not buyer_list:
             return jsonify(Error="Buyer Not Found"), 404
         else:
-            buyer = self.build_buyer_dict(row)
-        return jsonify(Buyer=buyer)
+            result_list = []
+            for row in buyer_list:
+                result = self.build_buyer_dict(row)
+                result_list.append(result)
+        return jsonify(Buyer=result_list)
 
     def getResourcesByBuyerId(self, b_id):
         dao = BuyerDAO()

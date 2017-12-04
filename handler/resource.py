@@ -33,12 +33,15 @@ class ResourceHandler:
 
     def getResourceById(self, r_id):
         dao = ResourceDAO()
-        row = dao.getResourceById(r_id)
-        if not row:
+        resources_list= dao.getResourceById(r_id)
+        if not resources_list:
             return jsonify(Error="Resource Not Found"), 404
         else:
-            resource = self.build_resource_dict(row)
-        return jsonify(Resource=resource)
+            result_list = []
+            for row in resources_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
+        return jsonify(Resource=result_list)
 
     def searchResource(self, args):
         category = args.get("category")

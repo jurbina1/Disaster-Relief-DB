@@ -1,5 +1,5 @@
-from config.dbconfig import pg_config
-import psycopg2
+#from config.dbconfig import pg_config
+#import psycopg2
 
 class AnnouncementDAO:
  #   def __init__(self):

@@ -1,5 +1,5 @@
-from config.dbconfig import pg_config
-import psycopg2
+#from config.dbconfig import pg_config
+#import psycopg2
 
 class RequestDAO:
  #   def __init__(self):

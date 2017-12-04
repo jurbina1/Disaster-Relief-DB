@@ -1,5 +1,6 @@
-from config.dbconfig import pg_config
-import psycopg2
+#from config.dbconfig import pg_config
+#import psycopg2
+
 
 class BuyerDAO:
    # def __init__(self):

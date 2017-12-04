@@ -48,26 +48,23 @@ class CreditCardHandler:
 
     def getBuyerByCreditCardId(self, c_id):
         dao = CreditCardDAO()
-        buyer_list = dao.getBuyerByCreditCardId(c_id)
-        if not buyer_list:
+        row = dao.getCreditCardById(c_id)
+        if not row:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            result_list = []
-            for row in buyer_list:
-                result = self.build_user_dict(row)
-                result_list.append(result)
-            return jsonify(Buyer=result_list)
+            result = self.build_user_dict(row)
+        return jsonify(Buyer=result)
 
     def searchCreditCards(self, args):
         name = args.get("name")
         b_id = args.get("b_id")
         dao = CreditCardDAO()
         creditcard_list = []
-        if name and b_id:
+        if (len(args) == 2) and name and b_id:
             creditcard_list = dao.getCreditCardByNameandBuyer(name, b_id)
-        elif name:
+        elif (len(args) == 1) and name:
             creditcard_list = dao.getCreditCardByName(name)
-        elif b_id:
+        elif (len(args) == 1) and b_id:
             creditcard_list = dao.getCreditCardByBuyer(b_id)
         else:
             return jsonify(Error = "Malformed query string"), 400

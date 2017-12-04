@@ -46,11 +46,11 @@ class ResourceHandler:
         name = args.get("name")
         dao = ResourceDAO()
         resources_list = []
-        if category and name:
+        if (len(args) == 2) and category and name:
             resources_list = dao.getResourceByCategoryAndName(category, name)
-        elif category:
+        elif (len(args) == 1) and category:
             resources_list = dao.getResourceByCategory(category)
-        elif name:
+        elif (len(args) == 1) and name:
             resources_list = dao.getResourceByName(name)
         else:
             return jsonify(Error = "Malformed query string"), 400

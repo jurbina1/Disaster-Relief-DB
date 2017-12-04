@@ -45,17 +45,14 @@ class BankAccountHandler:
             bankaccount = self.build_bankaccount_dict(row)
         return jsonify(Bank_Account=bankaccount)
 
-    def getBuyerByBankAccountId(self, ba_id):
+    def getSellerByBankAccountId(self, ba_id):
         dao = BankAccountDAO()
-        buyer_list = dao.getSellerByBankAccountId(ba_id)
-        if not buyer_list:
+        row = dao.getSellerByBankAccountId(ba_id)
+        if not row:
             return jsonify(Error="Bank Account Not Found"), 404
         else:
-            result_list = []
-            for row in buyer_list:
-                result = self.build_user_dict(row)
-                result_list.append(result)
-            return jsonify(Buyer=result_list)
+            result = self.build_user_dict(row)
+        return jsonify(Seller = result)
 
 
     def searchBankAccounts(self, args):
@@ -63,11 +60,11 @@ class BankAccountHandler:
         s_id = args.get("s_id")
         dao = BankAccountDAO()
         bankaccount_list = []
-        if ba_bank and s_id:
+        if (len(args) == 2) and ba_bank and s_id:
             bankaccount_list = dao.getBankAccountByBankandSeller(ba_bank, s_id)
-        elif ba_bank:
+        elif (len(args) == 1) and ba_bank:
             bankaccount_list = dao.getBankAccountByBank(ba_bank)
-        elif s_id:
+        elif (len(args) == 1) and s_id:
             bankaccount_list = dao.getBankAccountBySeller(s_id)
         else:
             return jsonify(Error = "Malformed query string"), 400

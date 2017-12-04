@@ -63,19 +63,19 @@ class BuyerHandler:
         region = args.get("region")
         dao = BuyerDAO()
         buyer_list = []
-        if name and lastname and region:
+        if (len(args) == 3) and name and lastname and region:
             buyer_list = dao.getBuyerByRegionNameAndLastName(region, name,lastname)
-        elif name and lastname:
+        elif (len(args) == 2) and name and lastname:
             buyer_list = dao.getBuyerByNameandLastName(name, lastname)
-        elif name and region:
+        elif (len(args) == 2) and name and region:
             buyer_list = dao.getBuyerByNameandRegion(name, region)
-        elif lastname and region:
+        elif (len(args) == 2) and lastname and region:
             buyer_list = dao.getBuyerByLastNameandRegion(lastname, region)
-        elif name:
+        elif (len(args) == 1) and name:
             buyer_list = dao.getBuyerByName(name)
-        elif lastname:
+        elif (len(args) == 1) and lastname:
             buyer_list = dao.getBuyerByLastName(lastname)
-        elif region:
+        elif (len(args) == 1) and region:
             buyer_list = dao.getBuyerByRegion(region)
         else:
             return jsonify(Error = "Malformed query string"), 400

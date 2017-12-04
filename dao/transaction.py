@@ -103,4 +103,11 @@ class TransactionDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getResourceByTransactionId(self, t_id):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_category, r_name, r_description from transaction natural inner join resource where t_id = %s;"
+        cursor.execute(query, (t_id,))
+        result = cursor.fetchone()
+        return result
     

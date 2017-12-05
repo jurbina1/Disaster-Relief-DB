@@ -15,9 +15,27 @@ app = Flask(__name__)
 def home():
     return 'Welcome to the Disaster Relief App!'
 
-@app.route('DisasterApp/administrators')
-def getAllResources():
+@app.route('/DisasterApp')
+def help():
+    return 'The possible URLs are: <br/>' \
+           '/administrators<br/>' \
+           '/resources<br/>' \
+           '/buyers<br/>' \
+           '/sellers<br/>' \
+           '/announcements<br/>' \
+           '/requests<br/>' \
+           '/bankaccounts<br/>' \
+           '/creditcards<br/>' \
+           '/transactions'
+
+@app.route('/DisasterApp/administrators')
+def getAllAdmins():
         return AdminHandler().getAllAdmins()
+
+
+@app.route('/DisasterApp/administrators/<int:admin_id>')
+def getAdminById(admin_id):
+        return AdminHandler().getAdminById(admin_id)
 
 @app.route('/DisasterApp/resources')
 def getAllResources():

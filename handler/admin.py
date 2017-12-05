@@ -14,7 +14,7 @@ class AdminHandler:
         result['u_age'] = row[7]
         return result
 
-    def getALlAdmins(self):
+    def getAllAdmins(self):
         dao = AdminDAO()
         admin_list = dao.getAllAdmins()
         if not admin_list:
@@ -28,7 +28,7 @@ class AdminHandler:
 
     def getAdminById(self, admin_id):
         dao = AdminDAO()
-        admin_list = dao.getBuyerById(admin_id)
+        admin_list = dao.getAdminById(admin_id)
         if not admin_list:
             return jsonify(Error="Administrator Not Found"), 404
         else:

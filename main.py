@@ -7,12 +7,17 @@ from handler.request import RequestHandler
 from handler.bankaccounts import BankAccountHandler
 from handler.creditcard import CreditCardHandler
 from handler.transaction import TransactionHandler
+from handler.admin import AdminHandler
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return 'Welcome to the Disaster Relief App!'
+
+@app.route('DisasterApp/administrators')
+def getAllResources():
+        return AdminHandler().getAllAdmins()
 
 @app.route('/DisasterApp/resources')
 def getAllResources():

@@ -58,7 +58,7 @@ class BuyerDAO:
 
     def getBuyerById(self, b_id):
             #cursor = self.conn.cursor()
-       #     query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer where b_id = %s;"
+       #     query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where b_id = %s;"
        #     cursor.execute(query, (b_id,))
        #     result = cursor.fetchone()
             result = []

@@ -1,5 +1,5 @@
 pg_config = {
     'user' : 'appusr',
-    'passwd' : 'appusr1',
+    'passwd' : 'default',
     'dbname' : 'appdb'
 }

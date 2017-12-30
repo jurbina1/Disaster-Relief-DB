@@ -44,7 +44,7 @@ class AnnouncementHandler:
         else:
             result_list = []
             for row in announcement_list:
-                result = []#self.build_announcement_dict(row)
+                result = self.build_announcement_dict(row)
                 result_list.append(result)
             return jsonify(Announcements=announcement_list)
 
@@ -56,7 +56,7 @@ class AnnouncementHandler:
         else:
             result_list = []
             for row in announcement_list:
-                result = []#self.build_announcement_dict(row)
+                result = self.build_announcement_dict(row)
                 result_list.append(result)
         return jsonify(Announcement=announcement_list)
 
@@ -68,7 +68,7 @@ class AnnouncementHandler:
         else:
             result_list = []
             for row in announcement_list:
-                result = []#self.build_resource_dict(row)
+                result = self.build_resource_dict(row)
                 result_list.append(result)
         return jsonify(Resource=announcement_list)
 
@@ -80,7 +80,7 @@ class AnnouncementHandler:
         else:
             result_list = []
             for row in announcement_list:
-                result = []#self.build_seller_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
         return jsonify(Seller=announcement_list)
 
@@ -111,6 +111,6 @@ class AnnouncementHandler:
         else:
             result_list = []
             for row in announcement_list:
-                result = []#self.build_announcement_dict(row)
+                result = self.build_announcement_dict(row)
                 result_list.append(result)
             return jsonify(Announcements=announcement_list)

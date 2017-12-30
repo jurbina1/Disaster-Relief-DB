@@ -26,9 +26,12 @@ class ResourceHandler:
         dao = ResourceDAO()
         resources_list = dao.getAllResources()
         result_list = []
-        for row in resources_list:
-            result = []#self.build_resource_dict(row)
-            result_list.append(result)
+        if not resources_list:
+            return jsonify(Error="Resource Not Found"), 404
+        else:
+            for row in resources_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
         return jsonify(Resources=resources_list)
 
     def getResourceById(self, r_id):
@@ -39,7 +42,7 @@ class ResourceHandler:
         else:
             result_list = []
             for row in resources_list:
-                result = []#self.build_resource_dict(row)
+                result = self.build_resource_dict(row)
                 result_list.append(result)
         return jsonify(Resource=resources_list)
 
@@ -58,7 +61,7 @@ class ResourceHandler:
             return jsonify(Error = "Malformed query string"), 400
         result_list = []
         for row in resources_list:
-            result = []#self.build_resource_dict(row)
+            result = self.build_resource_dict(row)
             result_list.append(result)
         return jsonify(Resources=resources_list)
 
@@ -70,7 +73,7 @@ class ResourceHandler:
         else:
             result_list = []
             for row in users_list:
-                result = []#self.build_user_dict(row)
+                result = self.build_user_dict(row)
                 result_list.append(result)
             return jsonify(Users=users_list)
 
@@ -82,6 +85,6 @@ class ResourceHandler:
         else:
             result_list = []
             for row in users_list:
-                result = []#self.build_user_dict(row)
+                result = self.build_user_dict(row)
                 result_list.append(result)
             return jsonify(Users=users_list)

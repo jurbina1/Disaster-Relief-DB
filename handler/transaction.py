@@ -55,7 +55,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = []#self.build_transaction_dict(row)
+                result = self.build_transaction_dict(row)
                 result_list.append(result)
             return jsonify(Transactions=transaction_list)
 
@@ -67,7 +67,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = []#self.build_transaction_dict(row)
+                result = self.build_transaction_dict(row)
                 result_list.append(result)
         return jsonify(Transaction=transaction_list)
 
@@ -79,7 +79,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = []#self.build_resource_dict(row)
+                result = self.build_resource_dict(row)
                 result_list.append(result)
         return jsonify(Resource=transaction_list)
 
@@ -92,7 +92,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
         return jsonify(Buyer=transaction_list)
 
@@ -104,7 +104,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = []#self.build_seller_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
         return jsonify(Seller=transaction_list)
 
@@ -135,7 +135,7 @@ class TransactionHandler:
         else:
             result_list = []
             for row in transaction_list:
-                result = []#self.build_transaction_dict(row)
+                result = self.build_transaction_dict(row)
                 result_list.append(result)
         return jsonify(Transactions=transaction_list)
 

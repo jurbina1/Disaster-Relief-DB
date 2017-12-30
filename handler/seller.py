@@ -33,7 +33,7 @@ class SellerHandler:
         else:
             result_list = []
             for row in seller_list:
-                result = []#self.build_seller_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
             return jsonify(Sellers=seller_list)
 
@@ -45,7 +45,7 @@ class SellerHandler:
         else:
             result_list = []
             for row in seller_list:
-                result = []#self.build_seller_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
         return jsonify(Seller=seller_list)
 
@@ -57,7 +57,7 @@ class SellerHandler:
         else:
             result_list = []
             for row in seller_list:
-                result = []#self.build_resource_dict(row)
+                result = self.build_resource_dict(row)
                 result_list.append(result)
             return jsonify(Resources=seller_list)
 
@@ -88,6 +88,6 @@ class SellerHandler:
         else:
             result_list = []
             for row in seller_list:
-                result = []#self.build_seller_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
             return jsonify(Sellers=seller_list)

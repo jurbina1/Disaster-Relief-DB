@@ -40,7 +40,7 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = []#self.build_request_dict(row)
+                result = self.build_request_dict(row)
                 result_list.append(result)
             return jsonify(Requests=request_list)
 
@@ -52,7 +52,7 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = []#self.build_request_dict(row)
+                result = self.build_request_dict(row)
                 result_list.append(result)
         return jsonify(Request=request_list)
 
@@ -64,7 +64,7 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = []#self.build_resource_dict(row)
+                result = self.build_resource_dict(row)
                 result_list.append(result)
         return jsonify(Resource=request_list)
 
@@ -76,7 +76,7 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
         return jsonify(Buyer=request_list)
 
@@ -107,6 +107,6 @@ class RequestHandler:
         else:
             result_list = []
             for row in request_list:
-                result = []#self.build_request_dict(row)
+                result = self.build_request_dict(row)
                 result_list.append(result)
             return jsonify(Requests=request_list)

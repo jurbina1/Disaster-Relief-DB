@@ -32,7 +32,7 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
             return jsonify(Buyers=buyer_list)
 
@@ -44,7 +44,7 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
         return jsonify(Buyer=buyer_list)
 
@@ -56,7 +56,7 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = []#self.build_resource_dict(row)
+                result = self.build_resource_dict(row)
                 result_list.append(result)
             return jsonify(Resources=buyer_list)
 
@@ -87,6 +87,6 @@ class BuyerHandler:
         else:
             result_list = []
             for row in buyer_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
             return jsonify(Buyers=buyer_list)

@@ -33,7 +33,7 @@ class CreditCardHandler:
         else:
             result_list = []
             for row in creditcard_list:
-                result = []#self.build_creditcard_dict(row)
+                result = self.build_creditcard_dict(row)
                 result_list.append(result)
             return jsonify(Credit_Cards=creditcard_list)
 
@@ -45,7 +45,7 @@ class CreditCardHandler:
         else:
             result_list = []
             for row in creditcard_list:
-                result = []#self.build_creditcard_dict(row)
+                result = self.build_creditcard_dict(row)
                 result_list.append(result)
         return jsonify(Credit_Card=creditcard_list)
 
@@ -57,7 +57,7 @@ class CreditCardHandler:
         else:
             result_list = []
             for row in creditcard_list:
-                result = []#self.build_user_dict(row)
+                result = self.build_user_dict(row)
                 result_list.append(result)
         return jsonify(Buyer=creditcard_list)
 
@@ -79,6 +79,6 @@ class CreditCardHandler:
         else:
             result_list = []
             for row in creditcard_list:
-                result = []#self.build_creditcard_dict(row)
+                result = self.build_creditcard_dict(row)
                 result_list.append(result)
             return jsonify(CreditCards=creditcard_list)

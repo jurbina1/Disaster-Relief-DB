@@ -32,7 +32,7 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = []#self.build_bankaccount_dict(row)
+                result = self.build_bankaccount_dict(row)
                 result_list.append(result)
             return jsonify(Bank_Accounts=bankaccount_list)
 
@@ -44,7 +44,7 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = []#self.build_bankaccount_dict(row)
+                result = self.build_bankaccount_dict(row)
                 result_list.append(result)
         return jsonify(Bank_Account=bankaccount_list)
 
@@ -56,7 +56,7 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = []#self.build_user_dict(row)
+                result = self.build_user_dict(row)
                 result_list.append(result)
         return jsonify(Seller = bankaccount_list)
 
@@ -79,6 +79,6 @@ class BankAccountHandler:
         else:
             result_list = []
             for row in bankaccount_list:
-                result = []#self.build_bankaccount_dict(row)
+                result = self.build_bankaccount_dict(row)
                 result_list.append(result)
             return jsonify(Bank_Accounts=bankaccount_list)

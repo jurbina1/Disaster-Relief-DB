@@ -22,7 +22,7 @@ class AdminHandler:
         else:
             result_list = []
             for row in admin_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
             return jsonify(Administrators=admin_list)
 
@@ -34,6 +34,6 @@ class AdminHandler:
         else:
             result_list = []
             for row in admin_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
         return jsonify(Administrator=admin_list)

@@ -28,7 +28,7 @@ class CreditCardDAO:
 
     def getBuyerByCreditCardId(self, c_id):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from creditcard natural inner join buyer natural inner join user where c_id = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from creditcard natural inner join buyer natural inner join users where c_id = %s;"
         cursor.execute(query, (c_id,))
         result = cursor.fetchone()
         return result

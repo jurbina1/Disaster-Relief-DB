@@ -39,7 +39,7 @@ class BankAccountDAO:
 
     def getSellerByBankAccountId(self, ba_id):
         cursor = self.conn.cursor()
-        query = "select s_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from bankaccount natural inner join seller natural inner join user where ba_id = %s;"
+        query = "select s_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from bankaccount natural inner join seller natural inner join users where ba_id = %s;"
         cursor.execute(query, (ba_id,))
         result = cursor.fetchone()
         return result

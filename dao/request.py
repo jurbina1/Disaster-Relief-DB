@@ -35,7 +35,7 @@ class RequestDAO:
 
     def getBuyerByRequestId(self, rq_id):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from request natural inner join buyer natural inner join user where rq_id = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from request natural inner join buyer natural inner join users where rq_id = %s;"
         cursor.execute(query, (rq_id,))
         result = cursor.fetchone()
         return result

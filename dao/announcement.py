@@ -35,7 +35,7 @@ class AnnouncementDAO:
 
     def getSellerByAnnouncementId(self, a_id):
         cursor = self.conn.cursor()
-        query = "select s_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from announcement natural inner join buyer natural inner join user where a_id = %s;"
+        query = "select s_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from announcement natural inner join buyer natural inner join users where a_id = %s;"
         cursor.execute(query, (a_id,))
         result = cursor.fetchone()
         return result

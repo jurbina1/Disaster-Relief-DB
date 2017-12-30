@@ -14,7 +14,7 @@ class BuyerDAO:
 
     def getAllBuyers(self):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -23,7 +23,7 @@ class BuyerDAO:
 
     def getBuyerById(self, b_id):
             cursor = self.conn.cursor()
-            query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where b_id = %s;"
+            query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where b_id = %s;"
             cursor.execute(query, (b_id,))
             result = cursor.fetchone()
             return result
@@ -39,7 +39,7 @@ class BuyerDAO:
 
     def getBuyerByRegionNameAndLastName(self, region, name, lastname):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_name = %s and u_lastname = %s and u_region = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_name = %s and u_lastname = %s and u_region = %s;"
         cursor.execute(query, (name, lastname, region))
         result = []
         for row in cursor:
@@ -48,7 +48,7 @@ class BuyerDAO:
 
     def getBuyerByNameandLastName(self, name, lastname):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_name = %s and u_lastname = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_name = %s and u_lastname = %s;"
         cursor.execute(query, (name, lastname))
         result = []
         for row in cursor:
@@ -57,7 +57,7 @@ class BuyerDAO:
 
     def getBuyerByNameandRegion(self, name, region):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_name = %s and u_region = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_name = %s and u_region = %s;"
         cursor.execute(query, (name, region))
         result = []
         for row in cursor:
@@ -66,7 +66,7 @@ class BuyerDAO:
 
     def getBuyerByLastNameandRegion(self, lastname, region):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_lastname = %s and u_region = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_lastname = %s and u_region = %s;"
         cursor.execute(query, (lastname, region))
         result = []
         for row in cursor:
@@ -75,7 +75,7 @@ class BuyerDAO:
 
     def getBuyerByName(self, name):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_name = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_name = %s;"
         cursor.execute(query, (name,))
         result = []
         for row in cursor:
@@ -84,7 +84,7 @@ class BuyerDAO:
 
     def getBuyerByLastName(self, lastname):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_lastnane = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_lastnane = %s;"
         cursor.execute(query, (lastname,))
         result = []
         for row in cursor:
@@ -93,7 +93,7 @@ class BuyerDAO:
 
     def getBuyerByRegion(self, region):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join user where u_region = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users where u_region = %s;"
         cursor.execute(query, (region,))
         result = []
         for row in cursor:

@@ -15,7 +15,7 @@ class AdminDAO:
 
     def getAllAdmins(self):
         cursor = self.conn.cursor()
-        query = "select admin_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from admin natural inner join user;"
+        query = "select admin_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from admin natural inner join users;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -24,7 +24,7 @@ class AdminDAO:
 
     def getAdminById(self, admin_id):
             cursor = self.conn.cursor()
-            query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from admin natural inner join user where admin_id = %s;"
+            query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from admin natural inner join users where admin_id = %s;"
             cursor.execute(query, (admin_id,))
             result = cursor.fetchone()
             return result

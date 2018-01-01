@@ -9,8 +9,8 @@ class RequestHandler:
         result['b_id'] = row[1]
         result['r_id'] = row[2]
         result['rq_qty'] = row[3]
-        result['rq_date'] = row[5]
-        result['rq_fulfillment'] = row[6]
+        result['rq_date'] = row[4]
+        result['rq_fulfillment'] = row[5]
         return result
 
     def build_resource_dict(self, row):

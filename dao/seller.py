@@ -28,7 +28,7 @@ class SellerDAO:
 
     def getResourcesBySellerId(self, s_id):
         cursor = self.conn.cursor()
-        query = "select r_id, r_name, r_category, r_type from resource natural inner join seller natural inner join announcement where s_id = %s;"
+        query = "select r_id, r_name, r_category, r_type, a_qty, a_total, a_date from resource natural inner join seller natural inner join announcement where s_id = %s;"
         cursor.execute(query, (s_id,))
         result = []
         for row in cursor:

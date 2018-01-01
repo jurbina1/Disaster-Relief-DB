@@ -89,7 +89,7 @@ def getAllSellers():
 def getSellerById(s_id):
     return SellerHandler().getSellerById(s_id)
 
-@app.route('/DisasterApp/sellers/<int:s_id>/resources')
+@app.route('/DisasterApp/sellers/<int:s_id>/announcements')
 def getResourcesBySellerId(s_id):
     return SellerHandler().getResourcesBySellerId(s_id)
 

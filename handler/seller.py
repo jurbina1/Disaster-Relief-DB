@@ -20,11 +20,12 @@ class SellerHandler:
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
-        result['r_category'] = row[1]
-        result['r_name'] = row[2]
-        result['a_qty'] = row[3]
-        result['a_price'] = row[4]
-        result['a_date'] = row[5]
+        result['r_name'] = row[1]
+        result['r_category'] = row[2]
+        result['r_type'] = row[3]
+        result['a_qty'] = row[4]
+        result['a_total'] = row[5]
+        result['a_date'] = row[6]
         return result
 
     def getAllSellers(self):

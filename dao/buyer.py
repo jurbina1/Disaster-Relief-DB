@@ -14,7 +14,7 @@ class BuyerDAO:
 
     def getAllBuyers(self):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from buyer natural inner join users;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from buyer natural inner join users;"
         cursor.execute(query)
         result = []
         for row in cursor:
@@ -30,7 +30,7 @@ class BuyerDAO:
 
     def getResourcesByBuyerId(self, b_id):
         cursor = self.conn.cursor()
-        query = "select r_id, r_name, r_category, r_type from resource natural inner join buyer natural inner join request where s_id = %s;"
+        query = "select r_id, r_name, r_category, r_type, rq_qty, rq_date from resource natural inner join buyer natural inner join request where b_id = %s;"
         cursor.execute(query, (b_id,))
         result = []
         for row in cursor:

@@ -6,8 +6,9 @@ class ResourceHandler:
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
-        result['r_category'] = row[1]
-        result['r_name'] = row[2]
+        result['r_name'] = row[1]
+        result['r_category'] = row[2]
+        result['r_type'] = row[3]
         return result
 
     def build_user_dict(self, row):
@@ -32,7 +33,7 @@ class ResourceHandler:
             for row in resources_list:
                 result = self.build_resource_dict(row)
                 result_list.append(result)
-        return jsonify(Resources=resources_list)
+        return jsonify(Resources=result_list)
 
     def getResourceById(self, r_id):
         dao = ResourceDAO()
@@ -40,21 +41,27 @@ class ResourceHandler:
         if not resources_list:
             return jsonify(Error="Resource Not Found"), 404
         else:
-            result_list = []
-            for row in resources_list:
-                result = self.build_resource_dict(row)
-                result_list.append(result)
-        return jsonify(Resource=resources_list)
+            result = self.build_resource_dict(resources_list)
+        return jsonify(Resource=result)
 
     def searchResource(self, args):
         category = args.get("category")
         name = args.get("name")
+        type = args.get("type")
         dao = ResourceDAO()
         resources_list = []
-        if (len(args) == 2) and category and name:
+        if (len(args) == 3) and category and name and type:
+            resources_list = dao.getResourceByCategoryTypeAndName(category, type, name)
+        elif (len(args) == 2) and category and name:
             resources_list = dao.getResourceByCategoryAndName(category, name)
+        elif (len(args) == 2) and category and type:
+            resources_list = dao.getResourceByCategoryAndType(category, type)
+        elif (len(args) == 2) and type and name:
+            resources_list = dao.getResourceByTypeAndName(type, name)
         elif (len(args) == 1) and category:
             resources_list = dao.getResourceByCategory(category)
+        elif (len(args) == 1) and type:
+            resources_list = dao.getResourceByType(type)
         elif (len(args) == 1) and name:
             resources_list = dao.getResourceByName(name)
         else:
@@ -63,7 +70,7 @@ class ResourceHandler:
         for row in resources_list:
             result = self.build_resource_dict(row)
             result_list.append(result)
-        return jsonify(Resources=resources_list)
+        return jsonify(Resources=result_list)
 
     def getSellersByResourceId(self, r_id):
         dao = ResourceDAO()
@@ -75,7 +82,7 @@ class ResourceHandler:
             for row in users_list:
                 result = self.build_user_dict(row)
                 result_list.append(result)
-            return jsonify(Users=users_list)
+            return jsonify(Sellers=result_list)
 
     def getBuyersByResourceId(self, r_id):
         dao = ResourceDAO()
@@ -87,4 +94,4 @@ class ResourceHandler:
             for row in users_list:
                 result = self.build_user_dict(row)
                 result_list.append(result)
-            return jsonify(Users=users_list)
+            return jsonify(Buyers=result_list)

@@ -20,8 +20,9 @@ class AnnouncementHandler:
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
-        result['r_category'] = row[1]
-        result['r_name'] = row[2]
+        result['r_name'] = row[1]
+        result['r_category'] = row[2]
+        result['r_type'] = row[3]
         return result
 
     def build_seller_dict(self, row):
@@ -46,7 +47,7 @@ class AnnouncementHandler:
             for row in announcement_list:
                 result = self.build_announcement_dict(row)
                 result_list.append(result)
-            return jsonify(Announcements=announcement_list)
+            return jsonify(Announcements=result_list)
 
     def getAnnouncementById(self, a_id):
         dao = AnnouncementDAO()
@@ -54,11 +55,8 @@ class AnnouncementHandler:
         if not announcement_list:
             return jsonify(Error="Announcement Not Found"), 404
         else:
-            result_list = []
-            for row in announcement_list:
-                result = self.build_announcement_dict(row)
-                result_list.append(result)
-        return jsonify(Announcement=announcement_list)
+            result = self.build_announcement_dict(announcement_list)
+        return jsonify(Announcement=result)
 
     def getResourcesByAnnouncementId(self, a_id):
         dao = AnnouncementDAO()
@@ -66,11 +64,8 @@ class AnnouncementHandler:
         if not announcement_list:
             return jsonify(Error="Announcement Not Found"), 404
         else:
-            result_list = []
-            for row in announcement_list:
-                result = self.build_resource_dict(row)
-                result_list.append(result)
-        return jsonify(Resource=announcement_list)
+            result = self.build_resource_dict(announcement_list)
+        return jsonify(Resource=result)
 
     def getSellerByAnnouncementId(self, a_id):
         dao = AnnouncementDAO()
@@ -78,11 +73,8 @@ class AnnouncementHandler:
         if not announcement_list:
             return jsonify(Error="Announcement Not Found"), 404
         else:
-            result_list = []
-            for row in announcement_list:
-                result = self.build_seller_dict(row)
-                result_list.append(result)
-        return jsonify(Seller=announcement_list)
+            result = self.build_seller_dict(announcement_list)
+        return jsonify(Seller=result)
 
     def searchAnnouncement(self, args):
         s_id = args.get("s_id")
@@ -113,4 +105,4 @@ class AnnouncementHandler:
             for row in announcement_list:
                 result = self.build_announcement_dict(row)
                 result_list.append(result)
-            return jsonify(Announcements=announcement_list)
+            return jsonify(Announcements=result_list)

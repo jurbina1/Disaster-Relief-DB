@@ -7,9 +7,8 @@ class BankAccountHandler:
         result = {}
         result['ba_id'] = row[0]
         result['s_id'] = row[1]
-        result['ba_rtnumber'] = row[2]
-        result['ba_number'] = row[3]
-        result['ba_bank'] = row[4]
+        result['ba_number'] = row[2]
+        result['ba_bank'] = row[3]
         return result
 
     def build_user_dict(self, row):
@@ -34,7 +33,7 @@ class BankAccountHandler:
             for row in bankaccount_list:
                 result = self.build_bankaccount_dict(row)
                 result_list.append(result)
-            return jsonify(Bank_Accounts=bankaccount_list)
+            return jsonify(Bank_Accounts=result_list)
 
     def getBankAccountById(self, ba_id):
         dao = BankAccountDAO()
@@ -42,11 +41,8 @@ class BankAccountHandler:
         if not bankaccount_list:
             return jsonify(Error="Bank Account Not Found"), 404
         else:
-            result_list = []
-            for row in bankaccount_list:
-                result = self.build_bankaccount_dict(row)
-                result_list.append(result)
-        return jsonify(Bank_Account=bankaccount_list)
+            result = self.build_bankaccount_dict(bankaccount_list)
+        return jsonify(Bank_Account=result)
 
     def getSellerByBankAccountId(self, ba_id):
         dao = BankAccountDAO()
@@ -54,11 +50,8 @@ class BankAccountHandler:
         if not bankaccount_list:
             return jsonify(Error="Bank Account Not Found"), 404
         else:
-            result_list = []
-            for row in bankaccount_list:
-                result = self.build_user_dict(row)
-                result_list.append(result)
-        return jsonify(Seller = bankaccount_list)
+            result = self.build_user_dict(bankaccount_list)
+        return jsonify(Seller = result)
 
 
     def searchBankAccounts(self, args):
@@ -81,4 +74,4 @@ class BankAccountHandler:
             for row in bankaccount_list:
                 result = self.build_bankaccount_dict(row)
                 result_list.append(result)
-            return jsonify(Bank_Accounts=bankaccount_list)
+            return jsonify(Bank_Accounts=result_list)

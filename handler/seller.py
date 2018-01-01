@@ -35,7 +35,7 @@ class SellerHandler:
             for row in seller_list:
                 result = self.build_seller_dict(row)
                 result_list.append(result)
-            return jsonify(Sellers=seller_list)
+            return jsonify(Sellers=result_list)
 
     def getSellerById(self, s_id):
         dao = SellerDAO()
@@ -43,11 +43,8 @@ class SellerHandler:
         if not seller_list:
             return jsonify(Error="Seller Not Found"), 404
         else:
-            result_list = []
-            for row in seller_list:
-                result = self.build_seller_dict(row)
-                result_list.append(result)
-        return jsonify(Seller=seller_list)
+            result = self.build_seller_dict(seller_list)
+        return jsonify(Seller=result)
 
     def getResourcesBySellerId(self, s_id):
         dao = SellerDAO()
@@ -59,7 +56,7 @@ class SellerHandler:
             for row in seller_list:
                 result = self.build_resource_dict(row)
                 result_list.append(result)
-            return jsonify(Resources=seller_list)
+            return jsonify(Resources=result_list)
 
     def searchSeller(self, args):
         name = args.get("name")
@@ -90,4 +87,4 @@ class SellerHandler:
             for row in seller_list:
                 result = self.build_seller_dict(row)
                 result_list.append(result)
-            return jsonify(Sellers=seller_list)
+            return jsonify(Sellers=result_list)

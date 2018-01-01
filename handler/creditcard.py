@@ -35,7 +35,7 @@ class CreditCardHandler:
             for row in creditcard_list:
                 result = self.build_creditcard_dict(row)
                 result_list.append(result)
-            return jsonify(Credit_Cards=creditcard_list)
+            return jsonify(Credit_Cards=result_list)
 
     def getCreditCardById(self, c_id):
         dao = CreditCardDAO()
@@ -43,11 +43,8 @@ class CreditCardHandler:
         if not creditcard_list:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            result_list = []
-            for row in creditcard_list:
-                result = self.build_creditcard_dict(row)
-                result_list.append(result)
-        return jsonify(Credit_Card=creditcard_list)
+            result = self.build_creditcard_dict(creditcard_list)
+        return jsonify(Credit_Card=result)
 
     def getBuyerByCreditCardId(self, c_id):
         dao = CreditCardDAO()
@@ -55,11 +52,8 @@ class CreditCardHandler:
         if not creditcard_list:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            result_list = []
-            for row in creditcard_list:
-                result = self.build_user_dict(row)
-                result_list.append(result)
-        return jsonify(Buyer=creditcard_list)
+            result = self.build_user_dict(creditcard_list)
+        return jsonify(Buyer=result)
 
     def searchCreditCards(self, args):
         name = args.get("name")
@@ -81,4 +75,4 @@ class CreditCardHandler:
             for row in creditcard_list:
                 result = self.build_creditcard_dict(row)
                 result_list.append(result)
-            return jsonify(CreditCards=creditcard_list)
+            return jsonify(CreditCards=result_list)

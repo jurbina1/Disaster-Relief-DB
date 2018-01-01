@@ -8,12 +8,14 @@ class TransactionHandler:
         result['t_id'] = row[0]
         result['s_id'] = row[1]
         result['b_id'] = row[2]
-        result['r_id'] = row[3]
-        result['t_qty'] = row[4]
-        result['t_total'] = row[5]
-        result['t_date'] = row[6]
-        result['t_donation'] = row[7]
-        result['t_reservation'] = row[8]
+        result['ba_id'] = row[3]
+        result['c_id'] = row[4]
+        result['r_id'] = row[5]
+        result['t_qty'] = row[6]
+        result['t_total'] = row[7]
+        result['t_date'] = row[8]
+        result['t_donation'] = row[9]
+        result['t_reservation'] = row[10]
         return result
 
     def build_buyer_dict(self, row):
@@ -43,8 +45,9 @@ class TransactionHandler:
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
-        result['r_category'] = row[1]
-        result['r_name'] = row[2]
+        result['r_name'] = row[1]
+        result['r_category'] = row[2]
+        result['r_type'] = row[3]
         return result
 
     def getAllTransactions(self):
@@ -57,7 +60,7 @@ class TransactionHandler:
             for row in transaction_list:
                 result = self.build_transaction_dict(row)
                 result_list.append(result)
-            return jsonify(Transactions=transaction_list)
+            return jsonify(Transactions=result_list)
 
     def getTransactionById(self, t_id):
         dao = TransactionDAO()
@@ -65,11 +68,8 @@ class TransactionHandler:
         if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result_list = []
-            for row in transaction_list:
-                result = self.build_transaction_dict(row)
-                result_list.append(result)
-        return jsonify(Transaction=transaction_list)
+            result = self.build_transaction_dict(transaction_list)
+        return jsonify(Transaction=result)
 
     def getResourcesByTransactionId(self, t_id):
         dao = TransactionDAO()
@@ -77,11 +77,8 @@ class TransactionHandler:
         if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result_list = []
-            for row in transaction_list:
-                result = self.build_resource_dict(row)
-                result_list.append(result)
-        return jsonify(Resource=transaction_list)
+            result = self.build_resource_dict(transaction_list)
+        return jsonify(Resource=result)
 
 
     def getBuyerByTransactionId(self, t_id):
@@ -90,11 +87,8 @@ class TransactionHandler:
         if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result_list = []
-            for row in transaction_list:
-                result = self.build_buyer_dict(row)
-                result_list.append(result)
-        return jsonify(Buyer=transaction_list)
+            result = self.build_buyer_dict(transaction_list)
+        return jsonify(Buyer=result)
 
     def getSellerByTransactionId(self, t_id):
         dao = TransactionDAO()
@@ -102,11 +96,8 @@ class TransactionHandler:
         if not transaction_list:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            result_list = []
-            for row in transaction_list:
-                result = self.build_seller_dict(row)
-                result_list.append(result)
-        return jsonify(Seller=transaction_list)
+            result = self.build_seller_dict(transaction_list)
+        return jsonify(Seller=result)
 
     def searchTransactions(self, args):
         s_id = args.get("s_id")
@@ -137,5 +128,5 @@ class TransactionHandler:
             for row in transaction_list:
                 result = self.build_transaction_dict(row)
                 result_list.append(result)
-        return jsonify(Transactions=transaction_list)
+        return jsonify(Transactions=result_list)
 

@@ -16,8 +16,9 @@ class RequestHandler:
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
-        result['r_category'] = row[1]
-        result['r_name'] = row[2]
+        result['r_name'] = row[1]
+        result['r_category'] = row[2]
+        result['r_type'] = row[3]
         return result
 
     def build_buyer_dict(self, row):
@@ -42,7 +43,7 @@ class RequestHandler:
             for row in request_list:
                 result = self.build_request_dict(row)
                 result_list.append(result)
-            return jsonify(Requests=request_list)
+            return jsonify(Requests=result_list)
 
     def getRequestById(self, rq_id):
         dao = RequestDAO()
@@ -50,11 +51,8 @@ class RequestHandler:
         if not request_list:
             return jsonify(Error="Request Not Found"), 404
         else:
-            result_list = []
-            for row in request_list:
-                result = self.build_request_dict(row)
-                result_list.append(result)
-        return jsonify(Request=request_list)
+            result = self.build_request_dict(request_list)
+        return jsonify(Request=result)
 
     def getResourcesByRequestId(self, rq_id):
         dao = RequestDAO()
@@ -62,11 +60,8 @@ class RequestHandler:
         if not request_list:
             return jsonify(Error="Request Not Found"), 404
         else:
-            result_list = []
-            for row in request_list:
-                result = self.build_resource_dict(row)
-                result_list.append(result)
-        return jsonify(Resource=request_list)
+            result = self.build_resource_dict(request_list)
+        return jsonify(Resource=result)
 
     def getBuyerByRequestId(self, rq_id):
         dao = RequestDAO()
@@ -74,11 +69,8 @@ class RequestHandler:
         if not request_list:
             return jsonify(Error="Request Not Found"), 404
         else:
-            result_list = []
-            for row in request_list:
-                result = self.build_buyer_dict(row)
-                result_list.append(result)
-        return jsonify(Buyer=request_list)
+            result = self.build_buyer_dict(request_list)
+        return jsonify(Buyer=result)
 
     def searchRequest(self, args):
         b_id = args.get("b_id")
@@ -109,4 +101,4 @@ class RequestHandler:
             for row in request_list:
                 result = self.build_request_dict(row)
                 result_list.append(result)
-            return jsonify(Requests=request_list)
+            return jsonify(Requests=result_list)

@@ -37,17 +37,44 @@ class ResourceDAO:
 
     def getResourceByName(self, r_name):
             cursor = self.conn.cursor()
-            query = "select * from resource where r_category = %s;"
+            query = "select * from resource where r_name = %s;"
             cursor.execute(query, (r_name,))
             result = []
             for row in cursor:
                 result.append(row)
             return result
 
+    def getResourceByCategoryTypeAndName(self,r_category, r_type, r_name):
+        cursor = self.conn.cursor()
+        query = "select * from resource where r_category = %s and r_type = %s and r_name = %s;"
+        cursor.execute(query, (r_category, r_type, r_name))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
     def getResourceByCategoryAndName(self,r_category, r_name):
         cursor = self.conn.cursor()
         query = "select * from resource where r_category = %s and r_name = %s;"
         cursor.execute(query, (r_category, r_name))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getResourceByCategoryAndType(self,r_category, r_type):
+        cursor = self.conn.cursor()
+        query = "select * from resource where r_category = %s and r_type = %s;"
+        cursor.execute(query, (r_category, r_type))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getResourceByTypeAndName(self,r_type, r_name):
+        cursor = self.conn.cursor()
+        query = "select * from resource where r_type = %s and r_name = %s;"
+        cursor.execute(query, (r_type, r_name))
         result = []
         for row in cursor:
             result.append(row)
@@ -70,4 +97,13 @@ class ResourceDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getResourceByType(self, r_type):
+            cursor = self.conn.cursor()
+            query = "select * from resource where r_type = %s;"
+            cursor.execute(query, (r_type,))
+            result = []
+            for row in cursor:
+                result.append(row)
+            return result
 

@@ -75,9 +75,9 @@ class RequestHandler:
         return jsonify(Buyer=result)
 
     def searchRequest(self, args):
-        b_id = args.get("b_id")
-        r_id = args.get("r_id")
-        rq_date = args.get("rq_date")
+        b_id = args.get("buyer")
+        r_id = args.get("resource")
+        rq_date = args.get("date")
         dao = RequestDAO()
         request_list = []
         if (len(args) == 3) and b_id and r_id and rq_date:

@@ -12,8 +12,7 @@ class AnnouncementHandler:
         result['a_price'] = row[4]
         result['a_totalprice'] = row[5]
         result['a_available'] = row[6]
-        result['a_totalresources'] = row[7]
-        result['a_date'] = row[8]
+        result['a_date'] = row[7]
 
         return result
 

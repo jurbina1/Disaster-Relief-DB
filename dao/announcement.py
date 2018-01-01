@@ -21,7 +21,7 @@ class AnnouncementDAO:
 
     def getAnnouncementById(self, a_id):
         cursor = self.conn.cursor()
-        query = "select * from announcement where t_id = %s;"
+        query = "select * from announcement where a_id = %s;"
         cursor.execute(query, (a_id,))
         result = cursor.fetchone()
         return result

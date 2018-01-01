@@ -78,9 +78,9 @@ class AnnouncementHandler:
         return jsonify(Seller=result)
 
     def searchAnnouncement(self, args):
-        s_id = args.get("s_id")
-        r_id = args.get("r_id")
-        a_date = args.get("a_date")
+        s_id = args.get("seller")
+        r_id = args.get("resource")
+        a_date = args.get("date")
         dao = AnnouncementDAO()
         announcement_list = []
         if (len(args) == 3) and s_id and r_id and a_date:

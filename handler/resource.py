@@ -66,10 +66,13 @@ class ResourceHandler:
             resources_list = dao.getResourceByName(name)
         else:
             return jsonify(Error = "Malformed query string"), 400
-        result_list = []
-        for row in resources_list:
-            result = self.build_resource_dict(row)
-            result_list.append(result)
+        if not resources_list:
+            return jsonify(Error="Resource Not Found"), 404
+        else:
+            result_list = []
+            for row in resources_list:
+                result = self.build_resource_dict(row)
+                result_list.append(result)
         return jsonify(Resources=result_list)
 
     def getSellersByResourceId(self, r_id):

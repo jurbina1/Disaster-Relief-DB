@@ -34,7 +34,7 @@ class TransactionDAO:
 
     def getSellerByTransactionId(self, t_id):
         cursor = self.conn.cursor()
-        query = "select s_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from transaction natural inner join buyer natural inner join users where t_id = %s;"
+        query = "select s_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from transaction natural inner join seller natural inner join users where t_id = %s;"
         cursor.execute(query, (t_id,))
         result = cursor.fetchone()
         return result

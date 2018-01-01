@@ -57,8 +57,8 @@ class BankAccountHandler:
 
 
     def searchBankAccounts(self, args):
-        ba_bank = args.get("ba_bank")
-        s_id = args.get("s_id")
+        ba_bank = args.get("bank")
+        s_id = args.get("seller")
         dao = BankAccountDAO()
         bankaccount_list = []
         if (len(args) == 2) and ba_bank and s_id:

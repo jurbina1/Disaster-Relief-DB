@@ -11,16 +11,18 @@ class BankAccountHandler:
         result['ba_bank'] = row[3]
         return result
 
-    def build_user_dict(self, row):
+    def build_seller_dict(self, row):
         result = {}
         result['s_id'] = row[0]
         result['u_name'] = row[1]
         result['u_lastname'] = row[2]
         result['u_email'] = row[3]
         result['u_password'] = row[4]
-        result['u_region'] = row[5]
-        result['u_phone'] = row[6]
-        result['u_age'] = row[7]
+        result['u_address'] = row[5]
+        result['u_city'] = row[6]
+        result['u_region'] = row[7]
+        result['u_phone'] = row[8]
+        result['u_age'] = row[9]
         return result
 
     def getAllBankAccounts(self):
@@ -50,7 +52,7 @@ class BankAccountHandler:
         if not bankaccount_list:
             return jsonify(Error="Bank Account Not Found"), 404
         else:
-            result = self.build_user_dict(bankaccount_list)
+            result = self.build_seller_dict(bankaccount_list)
         return jsonify(Seller = result)
 
 

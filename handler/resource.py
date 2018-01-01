@@ -11,16 +11,32 @@ class ResourceHandler:
         result['r_type'] = row[3]
         return result
 
-    def build_user_dict(self, row):
+    def build_seller_dict(self, row):
         result = {}
-        result['u_id'] = row[0]
+        result['s_id'] = row[0]
         result['u_name'] = row[1]
         result['u_lastname'] = row[2]
         result['u_email'] = row[3]
         result['u_password'] = row[4]
-        result['u_region'] = row[5]
-        result['u_phone'] = row[6]
-        result['u_age'] = row[7]
+        result['u_address'] = row[5]
+        result['u_city'] = row[6]
+        result['u_region'] = row[7]
+        result['u_phone'] = row[8]
+        result['u_age'] = row[9]
+        return result
+
+    def build_buyer_dict(self, row):
+        result = {}
+        result['b_id'] = row[0]
+        result['u_name'] = row[1]
+        result['u_lastname'] = row[2]
+        result['u_email'] = row[3]
+        result['u_password'] = row[4]
+        result['u_address'] = row[5]
+        result['u_city'] = row[6]
+        result['u_region'] = row[7]
+        result['u_phone'] = row[8]
+        result['u_age'] = row[9]
         return result
 
     def getAllResources(self):
@@ -83,7 +99,7 @@ class ResourceHandler:
         else:
             result_list = []
             for row in users_list:
-                result = self.build_user_dict(row)
+                result = self.build_seller_dict(row)
                 result_list.append(result)
             return jsonify(Sellers=result_list)
 
@@ -95,6 +111,6 @@ class ResourceHandler:
         else:
             result_list = []
             for row in users_list:
-                result = self.build_user_dict(row)
+                result = self.build_buyer_dict(row)
                 result_list.append(result)
             return jsonify(Buyers=result_list)

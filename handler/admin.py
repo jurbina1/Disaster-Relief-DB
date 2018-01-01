@@ -9,9 +9,11 @@ class AdminHandler:
         result['u_lastname'] = row[2]
         result['u_email'] = row[3]
         result['u_password'] = row[4]
-        result['u_region'] = row[5]
-        result['u_phone'] = row[6]
-        result['u_age'] = row[7]
+        result['u_address'] = row[5]
+        result['u_city'] = row[6]
+        result['u_region'] = row[7]
+        result['u_phone'] = row[8]
+        result['u_age'] = row[9]
         return result
 
     def getAllAdmins(self):

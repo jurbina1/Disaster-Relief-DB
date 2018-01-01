@@ -28,14 +28,14 @@ class RequestDAO:
 
     def getResourcesByRequestId(self, rq_id):
         cursor = self.conn.cursor()
-        query = "select r_id, r_category, r_name, r_description from request natural inner join resource where rq_id = %s;"
+        query = "select r_id, r_name, r_category, r_type from request natural inner join resource where rq_id = %s;"
         cursor.execute(query, (rq_id,))
         result = cursor.fetchone()
         return result
 
     def getBuyerByRequestId(self, rq_id):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from request natural inner join buyer natural inner join users where rq_id = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from request natural inner join buyer natural inner join users where rq_id = %s;"
         cursor.execute(query, (rq_id,))
         result = cursor.fetchone()
         return result

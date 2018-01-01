@@ -28,21 +28,21 @@ class AnnouncementDAO:
 
     def getResourcesByAnnouncementId(self, a_id):
         cursor = self.conn.cursor()
-        query = "select r_id, r_category, r_name, r_description from announcement natural inner join resource where a_id = %s;"
+        query = "select r_id, r_name, r_category, r_type from announcement natural inner join resource where a_id = %s;"
         cursor.execute(query, (a_id,))
         result = cursor.fetchone()
         return result
 
     def getSellerByAnnouncementId(self, a_id):
         cursor = self.conn.cursor()
-        query = "select s_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from announcement natural inner join buyer natural inner join users where a_id = %s;"
+        query = "select s_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from announcement natural inner join buyer natural inner join users where a_id = %s;"
         cursor.execute(query, (a_id,))
         result = cursor.fetchone()
         return result
 
     def getAnnouncementBySellerResourceandDate(self, a_date, s_id, r_id):
         cursor = self.conn.cursor()
-        query = "select * from transaction where a_date = %s and s_id = %s and r_id = %s;"
+        query = "select * from announcement where a_date = %s and s_id = %s and r_id = %s;"
         cursor.execute(query, (a_date, s_id, r_id))
         result = []
         for row in cursor:
@@ -51,7 +51,7 @@ class AnnouncementDAO:
 
     def getAnnouncementBySellerandResource(self, s_id, r_id):
         cursor = self.conn.cursor()
-        query = "select * from transaction where s_id = %s and r_id = %s;"
+        query = "select * from announcement where s_id = %s and r_id = %s;"
         cursor.execute(query, (s_id, r_id))
         result = []
         for row in cursor:
@@ -60,7 +60,7 @@ class AnnouncementDAO:
 
     def getAnnouncementBySellerandDate(self, s_id, a_date):
         cursor = self.conn.cursor()
-        query = "select * from transaction where a_date = %s and s_id = %s;"
+        query = "select * from announcement where a_date = %s and s_id = %s;"
         cursor.execute(query, (a_date, s_id))
         result = []
         for row in cursor:
@@ -69,7 +69,7 @@ class AnnouncementDAO:
 
     def getAnnouncementByResourceandDate(self, r_id, a_date):
         cursor = self.conn.cursor()
-        query = "select * from transaction where a_date = %s and r_id = %s;"
+        query = "select * from announcement where a_date = %s and r_id = %s;"
         cursor.execute(query, (a_date, r_id))
         result = []
         for row in cursor:
@@ -78,7 +78,7 @@ class AnnouncementDAO:
 
     def getAnnouncementBySeller(self, s_id):
         cursor = self.conn.cursor()
-        query = "select * from transaction where s_id = %s;"
+        query = "select * from announcement where s_id = %s;"
         cursor.execute(query, (s_id,))
         result = []
         for row in cursor:
@@ -87,7 +87,7 @@ class AnnouncementDAO:
 
     def getAnnouncementByResource(self, r_id):
         cursor = self.conn.cursor()
-        query = "select * from transaction where r_id = %s;"
+        query = "select * from announcement where r_id = %s;"
         cursor.execute(query, (r_id,))
         result = []
         for row in cursor:
@@ -96,7 +96,7 @@ class AnnouncementDAO:
 
     def getAnnouncementByDate(self, a_date):
         cursor = self.conn.cursor()
-        query = "select * from transaction where a_date = %s;"
+        query = "select * from announcement where a_date = %s;"
         cursor.execute(query, (a_date,))
         result = []
         for row in cursor:

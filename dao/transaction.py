@@ -27,14 +27,14 @@ class TransactionDAO:
 
     def getBuyerByTransactionId(self, t_id):
         cursor = self.conn.cursor()
-        query = "select b_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from transaction natural inner join buyer natural inner join users where t_id = %s;"
+        query = "select b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from transaction natural inner join buyer natural inner join users where t_id = %s;"
         cursor.execute(query, (t_id,))
         result = cursor.fetchone()
         return result
 
     def getSellerByTransactionId(self, t_id):
         cursor = self.conn.cursor()
-        query = "select s_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from transaction natural inner join buyer natural inner join users where t_id = %s;"
+        query = "select s_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from transaction natural inner join buyer natural inner join users where t_id = %s;"
         cursor.execute(query, (t_id,))
         result = cursor.fetchone()
         return result
@@ -104,7 +104,7 @@ class TransactionDAO:
 
     def getResourceByTransactionId(self, t_id):
         cursor = self.conn.cursor()
-        query = "select r_id, r_category, r_name, r_description from transaction natural inner join resource where t_id = %s;"
+        query = "select r_id, r_name, r_category, r_type from transaction natural inner join resource where t_id = %s;"
         cursor.execute(query, (t_id,))
         result = cursor.fetchone()
         return result

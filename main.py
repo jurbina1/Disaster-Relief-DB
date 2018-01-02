@@ -201,7 +201,10 @@ def getSellerByTransactionId(t_id):
 
 @app.route('/DisasterApp/transactions/getTotal')
 def getTransactionSum():
-    return TransactionHandler().getTransactionSum()
+    if not request.args:
+        return TransactionHandler().getTransactionSum(request.args)
+    else:
+        return TransactionHandler().getTransactionTotalSum()
 
 if __name__=='__main__':
     app.run()

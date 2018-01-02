@@ -104,9 +104,9 @@ class TransactionHandler:
         return jsonify(Seller=result)
 
     def searchTransactions(self, args):
-        s_id = args.get("s_id")
-        b_id = args.get("b_id")
-        t_date = args.get("t_date")
+        s_id = args.get("seller")
+        b_id = args.get("buyer")
+        t_date = args.get("date")
         dao = TransactionDAO()
         transaction_list = []
         if (len(args) == 3) and s_id and b_id and t_date:
@@ -134,11 +134,18 @@ class TransactionHandler:
                 result_list.append(result)
         return jsonify(Transactions=result_list)
 
-    def getTransactionSum(self):
+    def getTransactionTotalSum(self):
         dao = TransactionDAO()
-        sum = dao.getTransactionSum()
+        sum = dao.getTransactionTotalSum()
         if not sum:
             return jsonify(Error="Transaction Not Found"), 404
         else:
             return jsonify(TransactionsSum=sum[0])
+
+    def getTransactionSum(self, args):
+        s_id = args.get("s_id")
+        b_id = args.get("b_id")
+        t_date = args.get("t_date")
+        dao = TransactionDAO()
+        transaction_list = []
 

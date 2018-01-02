@@ -143,9 +143,24 @@ class TransactionHandler:
             return jsonify(TransactionsSum=sum[0])
 
     def getTransactionSum(self, args):
-        s_id = args.get("s_id")
-        b_id = args.get("b_id")
-        t_date = args.get("t_date")
+        s_id = args.get("seller")
+        b_id = args.get("buyer")
+        t_date = args.get("date")
+        r_id = args.get("resource")
         dao = TransactionDAO()
-        transaction_list = []
+        sum=[]
+        if (len(args) == 1) and s_id:
+            transaction_list = dao.getTransactionSumBySeller(s_id)
+        elif (len(args) == 1) and b_id:
+            transaction_list = dao.getTransactionSumByBuyer(b_id)
+        elif (len(args) == 1) and t_date:
+            transaction_list = dao.getTransactionSumByDate(t_date)
+        elif (len(args) == 1) and r_id:
+            transaction_list = dao.getTransactionSumByBuyer(r_id)
+        else:
+            return jsonify(Error="Malformed query string"), 400
+        if not transaction_list:
+            return jsonify(Error="Transaction Not Found"), 404
+        else:
+            return jsonify(Transactions=sum[0])
 

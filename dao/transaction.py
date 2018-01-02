@@ -115,3 +115,31 @@ class TransactionDAO:
         cursor.execute(query)
         result = cursor.fetchone()
         return result
+
+    def getTransactionSumBySeller(self, s_id):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from transaction where s_id = %s;"
+        cursor.execute(query, (s_id,))
+        result = cursor.fetchone()
+        return result
+
+    def getTransactionSumByBuyer(self, b_id):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from transaction where b_id = %s;"
+        cursor.execute(query, (b_id,))
+        result = cursor.fetchone()
+        return result
+
+    def getTransactionSumByResource(self, r_id):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from transaction where r_id = %s;"
+        cursor.execute(query, (r_id,))
+        result = cursor.fetchone()
+        return result
+
+    def getTransactionSumByDate(self, t_date):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from transaction where t_date = %s;"
+        cursor.execute(query, (t_date,))
+        result = cursor.fetchone()
+        return result

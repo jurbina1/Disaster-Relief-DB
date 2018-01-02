@@ -134,3 +134,11 @@ class TransactionHandler:
                 result_list.append(result)
         return jsonify(Transactions=result_list)
 
+    def getTransactionSum(self):
+        dao = TransactionDAO()
+        sum = dao.getTransactionSum()
+        if not sum:
+            return jsonify(Error="Transaction Not Found"), 404
+        else:
+            return jsonify(TransactionsSum=sum[0])
+

@@ -108,3 +108,10 @@ class TransactionDAO:
         cursor.execute(query, (t_id,))
         result = cursor.fetchone()
         return result
+
+    def getTransactionSum(self):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from transaction;"
+        cursor.execute(query)
+        result = cursor.fetchone()
+        return result

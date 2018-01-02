@@ -199,7 +199,9 @@ def getBuyerByTransactionId(t_id):
 def getSellerByTransactionId(t_id):
     return TransactionHandler().getSellerByTransactionId(t_id)
 
-
+@app.route('/DisasterApp/transactions/getTotal')
+def getTransactionSum():
+    return TransactionHandler().getTransactionSum()
 
 if __name__=='__main__':
     app.run()

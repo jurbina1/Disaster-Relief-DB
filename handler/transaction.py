@@ -168,5 +168,8 @@ class TransactionHandler:
         if not sum:
             return jsonify(Error="Transaction Not Found"), 404
         else:
+            if sum[0] is None:
+                sum = []
+                sum.append(0)
             return jsonify(TransactionsSum=sum[0])
 

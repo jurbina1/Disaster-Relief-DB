@@ -104,3 +104,15 @@ class RequestHandler:
                 result = self.build_request_dict(row)
                 result_list.append(result)
             return jsonify(Requests=result_list)
+
+    def getAvailableRequests(self):
+        dao = RequestDAO()
+        request_list = dao.getAvailableRequests()
+        if not request_list:
+            return jsonify(Error="Request Not Found"), 404
+        else:
+            result_list = []
+            for row in request_list:
+                result = self.build_request_dict(row)
+                result_list.append(result)
+            return jsonify(Requests=result_list)

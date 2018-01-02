@@ -137,6 +137,10 @@ def getResourcesByRequestId(rq_id):
 def getBuyerByRequestId(rq_id):
     return RequestHandler().getBuyerByRequestId(rq_id)
 
+@app.route('/DisasterApp/requests/active')
+def getAvailableRequests():
+    return RequestHandler().getAvailableRequests()
+
 
 
 

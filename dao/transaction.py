@@ -143,3 +143,17 @@ class TransactionDAO:
         cursor.execute(query, (t_date,))
         result = cursor.fetchone()
         return result
+
+    def getTransactionSumByCity(self, city):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from transaction where t_date = %s;"
+        cursor.execute(query, (city,))
+        result = cursor.fetchone()
+        return result
+
+    def getTransactionSumByRegion(self, region):
+        cursor = self.conn.cursor()
+        query = "select sum(t_total) from((select s_id, u_region as s_region from seller natural inner join users) S join transaction T on T.s_id = S.s_id) T1 join (select b_id, u_region as b_region from buyer natural inner join users) B on T1.b_id = B.b_id where b_region = %s or s_region= %s;"
+        cursor.execute(query, (region,region))
+        result = cursor.fetchone()
+        return result

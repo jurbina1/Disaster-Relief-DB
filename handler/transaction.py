@@ -147,20 +147,26 @@ class TransactionHandler:
         b_id = args.get("buyer")
         t_date = args.get("date")
         r_id = args.get("resource")
+        region = args.get("region")
+        city = args.get("city")
         dao = TransactionDAO()
         sum=[]
         if (len(args) == 1) and s_id:
-            transaction_list = dao.getTransactionSumBySeller(s_id)
+            sum = dao.getTransactionSumBySeller(s_id)
         elif (len(args) == 1) and b_id:
-            transaction_list = dao.getTransactionSumByBuyer(b_id)
+            sum = dao.getTransactionSumByBuyer(b_id)
         elif (len(args) == 1) and t_date:
-            transaction_list = dao.getTransactionSumByDate(t_date)
+            sum = dao.getTransactionSumByDate(t_date)
         elif (len(args) == 1) and r_id:
-            transaction_list = dao.getTransactionSumByBuyer(r_id)
+            sum = dao.getTransactionSumByResource(r_id)
+        elif (len(args) == 1) and region:
+            sum = dao.getTransactionSumByRegion(region)
+        elif (len(args) == 1) and city:
+            sum = dao.getTransactionSumByCity(city)
         else:
             return jsonify(Error="Malformed query string"), 400
-        if not transaction_list:
+        if not sum:
             return jsonify(Error="Transaction Not Found"), 404
         else:
-            return jsonify(Transactions=sum[0])
+            return jsonify(TransactionsSum=sum[0])
 

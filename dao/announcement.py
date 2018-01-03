@@ -103,3 +103,11 @@ class AnnouncementDAO:
             result.append(row)
         return result
 
+    def getAvailableAnnouncements(self):
+        cursor = self.conn.cursor()
+        query = "select * from announcement where a_available > 0;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

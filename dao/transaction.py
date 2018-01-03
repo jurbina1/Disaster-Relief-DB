@@ -157,3 +157,21 @@ class TransactionDAO:
         cursor.execute(query, (region,region))
         result = cursor.fetchone()
         return result
+
+    def getDonations(self):
+        cursor = self.conn.cursor()
+        query = "select * from transaction where t_donation = true;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getReservations(self):
+        cursor = self.conn.cursor()
+        query = "select * from transaction where t_reservation = true;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

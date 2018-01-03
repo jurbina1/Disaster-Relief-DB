@@ -173,3 +173,27 @@ class TransactionHandler:
                 sum.append(0)
             return jsonify(TransactionsSum=sum[0])
 
+    def getDonations(self):
+        dao = TransactionDAO()
+        transaction_list = dao.getDonations()
+        if not transaction_list:
+            return jsonify(Error="Announcement Not Found"), 404
+        else:
+            result_list = []
+            for row in transaction_list:
+                result = self.build_transaction_dict(row)
+                result_list.append(result)
+            return jsonify(Announcements=result_list)
+
+    def getReservations(self):
+        dao = TransactionDAO()
+        transaction_list = dao.getReservations()
+        if not transaction_list:
+            return jsonify(Error="Announcement Not Found"), 404
+        else:
+            result_list = []
+            for row in transaction_list:
+                result = self.build_transaction_dict(row)
+                result_list.append(result)
+            return jsonify(Announcements=result_list)
+

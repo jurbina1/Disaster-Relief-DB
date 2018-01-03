@@ -115,7 +115,9 @@ def getResourcesByAnnouncementId(a_id):
 def getSellerByAnnouncementId(a_id):
     return AnnouncementHandler().getSellerByAnnouncementId(a_id)
 
-
+@app.route('/DisasterApp/announcements/active')
+def getAvailableAnnouncements():
+    return AnnouncementHandler().getAvailableAnnouncements()
 
 
 @app.route('/DisasterApp/requests')
@@ -209,6 +211,14 @@ def getTransactionSum():
         return TransactionHandler().getTransactionSum(request.args)
     else:
         return TransactionHandler().getTransactionTotalSum()
+
+@app.route('/DisasterApp/transactions/donations')
+def getDonations():
+    return TransactionHandler().getDonations()
+
+@app.route('/DisasterApp/transactions/reservations')
+def getReservations():
+    return TransactionHandler().getReservations()
 
 if __name__=='__main__':
     app.run()

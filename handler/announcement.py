@@ -107,3 +107,15 @@ class AnnouncementHandler:
                 result = self.build_announcement_dict(row)
                 result_list.append(result)
             return jsonify(Announcements=result_list)
+
+    def getAvailableAnnouncements(self):
+        dao = AnnouncementDAO()
+        announcement_list = dao.getAvailableAnnouncements()
+        if not announcement_list:
+            return jsonify(Error="Announcement Not Found"), 404
+        else:
+            result_list = []
+            for row in announcement_list:
+                result = self.build_announcement_dict(row)
+                result_list.append(result)
+            return jsonify(Announcements=result_list)

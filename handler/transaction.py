@@ -54,6 +54,24 @@ class TransactionHandler:
         result['r_type'] = row[3]
         return result
 
+    def build_creditcard_dict(self, row):
+        result = {}
+        result['c_id'] = row[0]
+        result['b_id'] = row[1]
+        result['c_name'] = row[2]
+        result['c_number'] = row[3]
+        result['c_cvv'] = row[4]
+        result['c_expdate'] = row[5]
+        return result
+
+    def build_bankaccount_dict(self, row):
+        result = {}
+        result['ba_id'] = row[0]
+        result['s_id'] = row[1]
+        result['ba_number'] = row[2]
+        result['ba_bank'] = row[3]
+        return result
+
     def getAllTransactions(self):
         dao = TransactionDAO()
         transaction_list = dao.getAllTransactions()
@@ -197,3 +215,20 @@ class TransactionHandler:
                 result_list.append(result)
             return jsonify(Announcements=result_list)
 
+    def getCreditCardByTransactionId(self, t_id):
+        dao = TransactionDAO()
+        transaction_list = dao.getCreditCardByTransactionId(t_id)
+        if not transaction_list:
+            return jsonify(Error="Transaction Not Found"), 404
+        else:
+            result = self.build_creditcard_dict(transaction_list)
+        return jsonify(CreditCard=result)
+
+    def getBankAccountByTransactionId(self, t_id):
+        dao = TransactionDAO()
+        transaction_list = dao.getBankAccountByTransactionId(t_id)
+        if not transaction_list:
+            return jsonify(Error="Transaction Not Found"), 404
+        else:
+            result = self.build_bankaccount_dict(transaction_list)
+        return jsonify(CreditCard=result)

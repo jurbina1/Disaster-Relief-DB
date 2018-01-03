@@ -175,3 +175,17 @@ class TransactionDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getCreditCardByTransactionId(self, t_id):
+        cursor = self.conn.cursor()
+        query = "select c_id, b_id, c_name, c_number, c_cvv, c_expdate from transaction natural inner join creditcard where t_id = %s;"
+        cursor.execute(query, (t_id,))
+        result = cursor.fetchone()
+        return result
+
+    def getBankAccountByTransactionId(self, t_id):
+        cursor = self.conn.cursor()
+        query = "select ba_id, s_id, ba_number, ba_bank from transaction natural inner join bankaccount where t_id = %s;"
+        cursor.execute(query, (t_id,))
+        result = cursor.fetchone()
+        return result

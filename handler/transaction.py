@@ -195,7 +195,7 @@ class TransactionHandler:
         dao = TransactionDAO()
         transaction_list = dao.getDonations()
         if not transaction_list:
-            return jsonify(Error="Announcement Not Found"), 404
+            return jsonify(Error="Transaction Not Found"), 404
         else:
             result_list = []
             for row in transaction_list:
@@ -207,7 +207,7 @@ class TransactionHandler:
         dao = TransactionDAO()
         transaction_list = dao.getReservations()
         if not transaction_list:
-            return jsonify(Error="Announcement Not Found"), 404
+            return jsonify(Error="Transaction Not Found"), 404
         else:
             result_list = []
             for row in transaction_list:
@@ -219,7 +219,7 @@ class TransactionHandler:
         dao = TransactionDAO()
         transaction_list = dao.getCreditCardByTransactionId(t_id)
         if not transaction_list:
-            return jsonify(Error="Transaction Not Found"), 404
+            return jsonify(Error="Credit Card Not Found"), 404
         else:
             result = self.build_creditcard_dict(transaction_list)
         return jsonify(CreditCard=result)
@@ -228,7 +228,7 @@ class TransactionHandler:
         dao = TransactionDAO()
         transaction_list = dao.getBankAccountByTransactionId(t_id)
         if not transaction_list:
-            return jsonify(Error="Transaction Not Found"), 404
+            return jsonify(Error="Bank Account Not Found"), 404
         else:
             result = self.build_bankaccount_dict(transaction_list)
-        return jsonify(CreditCard=result)
+        return jsonify(BankAccount=result)

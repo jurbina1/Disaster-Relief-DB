@@ -205,6 +205,14 @@ def getBuyerByTransactionId(t_id):
 def getSellerByTransactionId(t_id):
     return TransactionHandler().getSellerByTransactionId(t_id)
 
+@app.route('/DisasterApp/transactions/<int:t_id>/creditcard')
+def getCreditCardByTransactionId(t_id):
+    return TransactionHandler().getCreditCardByTransactionId(t_id)
+
+@app.route('/DisasterApp/transactions/<int:t_id>/bankaccount')
+def getBankAccountByTransactionId(t_id):
+    return TransactionHandler().getBankAccountByTransactionId(t_id)
+
 @app.route('/DisasterApp/transactions/getTotal')
 def getTransactionSum():
     if request.args:

@@ -73,6 +73,8 @@ class BuyerHandler:
                 result['r_type'] = "Gasoline Power Generator"
             else:
                 result['r_type'] = "Propane Power Generator"
+        result['rq_qty'] = row[4]
+        result['rq_date'] = row[5]
         return result
 
     def getAllBuyers(self):

@@ -99,3 +99,12 @@ class BuyerDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getTransactionsByBuyerId(self, b_id):
+        cursor = self.conn.cursor()
+        query = "select t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_date, t_donation, t_reservation from buyer natural inner join transactions where b_id = %s;"
+        cursor.execute(query, (b_id,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

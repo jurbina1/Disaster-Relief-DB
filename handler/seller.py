@@ -17,6 +17,21 @@ class SellerHandler:
         result['u_age'] = row[9]
         return result
 
+    def build_transaction_dict(self, row):
+        result = {}
+        result['t_id'] = row[0]
+        result['s_id'] = row[1]
+        result['b_id'] = row[2]
+        result['ba_id'] = row[3]
+        result['c_id'] = row[4]
+        result['r_id'] = row[5]
+        result['t_qty'] = row[6]
+        result['t_total'] = row[7]
+        result['t_date'] = row[8]
+        result['t_donation'] = row[9]
+        result['t_reservation'] = row[10]
+        return result
+
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
@@ -141,3 +156,15 @@ class SellerHandler:
                 result = self.build_seller_dict(row)
                 result_list.append(result)
             return jsonify(Sellers=result_list)
+
+    def getTransactionsBySellerId(self, s_id):
+        dao = SellerDAO()
+        transaction_list = dao.getTransactionsBySellerId(s_id)
+        if not transaction_list:
+            return jsonify(Error="Transaction Not Found"), 404
+        else:
+            result_list = []
+            for row in transaction_list:
+                result = self.build_transaction_dict(row)
+                result_list.append(result)
+            return jsonify(Transactions=result_list)

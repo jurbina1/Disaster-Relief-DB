@@ -74,6 +74,9 @@ def getBuyerById(b_id):
 def getResourcesByBuyerId(b_id):
     return BuyerHandler().getResourcesByBuyerId(b_id)
 
+@app.route('/DisasterApp/buyers/<int:b_id>/transactions')
+def getResourcesByBuyerId(b_id):
+    return BuyerHandler().getTransactionsByBuyerId(b_id)
 
 
 
@@ -92,6 +95,10 @@ def getSellerById(s_id):
 @app.route('/DisasterApp/sellers/<int:s_id>/announcements')
 def getResourcesBySellerId(s_id):
     return SellerHandler().getResourcesBySellerId(s_id)
+
+@app.route('/DisasterApp/sellers/<int:s_id>/transactions')
+def getResourcesByBuyerId(s_id):
+    return SellerHandler().getTransactionsBySellerId(s_id)
 
 
 

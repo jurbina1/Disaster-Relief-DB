@@ -100,7 +100,7 @@ class SellerDAO:
 
     def getTransactionsBySellerId(self, s_id):
         cursor = self.conn.cursor()
-        query = "select t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_date, t_donation, t_reservation from seller natural inner join transactions where s_id = %s;"
+        query = "select t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_date, t_donation, t_reservation from seller natural inner join transaction where s_id = %s;"
         cursor.execute(query, (s_id,))
         result = []
         for row in cursor:

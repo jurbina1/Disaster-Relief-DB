@@ -13,16 +13,18 @@ class CreditCardHandler:
         result['c_expdate'] = row[5]
         return result
 
-    def build_user_dict(self, row):
+    def build_buyer_dict(self, row):
         result = {}
         result['b_id'] = row[0]
         result['u_name'] = row[1]
         result['u_lastname'] = row[2]
         result['u_email'] = row[3]
         result['u_password'] = row[4]
-        result['u_region'] = row[5]
-        result['u_phone'] = row[6]
-        result['u_age'] = row[7]
+        result['u_address'] = row[5]
+        result['u_city'] = row[6]
+        result['u_region'] = row[7]
+        result['u_phone'] = row[8]
+        result['u_age'] = row[9]
         return result
 
     def getAllCreditCards(self):
@@ -33,9 +35,9 @@ class CreditCardHandler:
         else:
             result_list = []
             for row in creditcard_list:
-                result = []#self.build_creditcard_dict(row)
+                result = self.build_creditcard_dict(row)
                 result_list.append(result)
-            return jsonify(Credit_Cards=creditcard_list)
+            return jsonify(Credit_Cards=result_list)
 
     def getCreditCardById(self, c_id):
         dao = CreditCardDAO()
@@ -43,11 +45,8 @@ class CreditCardHandler:
         if not creditcard_list:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            result_list = []
-            for row in creditcard_list:
-                result = []#self.build_creditcard_dict(row)
-                result_list.append(result)
-        return jsonify(Credit_Card=creditcard_list)
+            result = self.build_creditcard_dict(creditcard_list)
+        return jsonify(Credit_Card=result)
 
     def getBuyerByCreditCardId(self, c_id):
         dao = CreditCardDAO()
@@ -55,11 +54,8 @@ class CreditCardHandler:
         if not creditcard_list:
             return jsonify(Error="Credit Card Not Found"), 404
         else:
-            result_list = []
-            for row in creditcard_list:
-                result = []#self.build_user_dict(row)
-                result_list.append(result)
-        return jsonify(Buyer=creditcard_list)
+            result = self.build_buyer_dict(creditcard_list)
+        return jsonify(Buyer=result)
 
     def searchCreditCards(self, args):
         name = args.get("name")
@@ -79,6 +75,6 @@ class CreditCardHandler:
         else:
             result_list = []
             for row in creditcard_list:
-                result = []#self.build_creditcard_dict(row)
+                result = self.build_creditcard_dict(row)
                 result_list.append(result)
-            return jsonify(CreditCards=creditcard_list)
+            return jsonify(CreditCards=result_list)

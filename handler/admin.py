@@ -9,9 +9,11 @@ class AdminHandler:
         result['u_lastname'] = row[2]
         result['u_email'] = row[3]
         result['u_password'] = row[4]
-        result['u_region'] = row[5]
-        result['u_phone'] = row[6]
-        result['u_age'] = row[7]
+        result['u_address'] = row[5]
+        result['u_city'] = row[6]
+        result['u_region'] = row[7]
+        result['u_phone'] = row[8]
+        result['u_age'] = row[9]
         return result
 
     def getAllAdmins(self):
@@ -22,9 +24,9 @@ class AdminHandler:
         else:
             result_list = []
             for row in admin_list:
-                result = []#self.build_buyer_dict(row)
+                result = self.build_admin_dict(row)
                 result_list.append(result)
-            return jsonify(Administrators=admin_list)
+            return jsonify(Administrators=result_list)
 
     def getAdminById(self, admin_id):
         dao = AdminDAO()
@@ -32,8 +34,5 @@ class AdminHandler:
         if not admin_list:
             return jsonify(Error="Administrator Not Found"), 404
         else:
-            result_list = []
-            for row in admin_list:
-                result = []#self.build_buyer_dict(row)
-                result_list.append(result)
-        return jsonify(Administrator=admin_list)
+            result = self.build_admin_dict(admin_list)
+        return jsonify(Administrator=result)

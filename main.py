@@ -74,6 +74,9 @@ def getBuyerById(b_id):
 def getResourcesByBuyerId(b_id):
     return BuyerHandler().getResourcesByBuyerId(b_id)
 
+@app.route('/DisasterApp/buyers/<int:b_id>/transactions')
+def getTransactionsByBuyerId(b_id):
+    return BuyerHandler().getTransactionsByBuyerId(b_id)
 
 
 
@@ -89,9 +92,13 @@ def getAllSellers():
 def getSellerById(s_id):
     return SellerHandler().getSellerById(s_id)
 
-@app.route('/DisasterApp/sellers/<int:s_id>/resources')
+@app.route('/DisasterApp/sellers/<int:s_id>/announcements')
 def getResourcesBySellerId(s_id):
     return SellerHandler().getResourcesBySellerId(s_id)
+
+@app.route('/DisasterApp/sellers/<int:s_id>/transactions')
+def getTransactionsBySellerId(s_id):
+    return SellerHandler().getTransactionsBySellerId(s_id)
 
 
 
@@ -115,6 +122,17 @@ def getResourcesByAnnouncementId(a_id):
 def getSellerByAnnouncementId(a_id):
     return AnnouncementHandler().getSellerByAnnouncementId(a_id)
 
+@app.route('/DisasterApp/announcements/active')
+def getAvailableAnnouncements():
+    return AnnouncementHandler().getAvailableAnnouncements()
+
+@app.route('/DisasterApp/announcements/resources')
+def getAllAvailableResources():
+    if request.args:
+        return AnnouncementHandler().searchAvailableResources(request.args)
+    else:
+        return AnnouncementHandler().getAllAvailableResources()
+
 
 
 
@@ -136,6 +154,11 @@ def getResourcesByRequestId(rq_id):
 @app.route('/DisasterApp/requests/<int:rq_id>/buyer')
 def getBuyerByRequestId(rq_id):
     return RequestHandler().getBuyerByRequestId(rq_id)
+
+@app.route('/DisasterApp/requests/active')
+def getAvailableRequests():
+    return RequestHandler().getAvailableRequests()
+
 
 
 
@@ -199,7 +222,28 @@ def getBuyerByTransactionId(t_id):
 def getSellerByTransactionId(t_id):
     return TransactionHandler().getSellerByTransactionId(t_id)
 
+@app.route('/DisasterApp/transactions/<int:t_id>/creditcard')
+def getCreditCardByTransactionId(t_id):
+    return TransactionHandler().getCreditCardByTransactionId(t_id)
 
+@app.route('/DisasterApp/transactions/<int:t_id>/bankaccount')
+def getBankAccountByTransactionId(t_id):
+    return TransactionHandler().getBankAccountByTransactionId(t_id)
+
+@app.route('/DisasterApp/transactions/getTotal')
+def getTransactionSum():
+    if request.args:
+        return TransactionHandler().getTransactionSum(request.args)
+    else:
+        return TransactionHandler().getTransactionTotalSum()
+
+@app.route('/DisasterApp/transactions/donations')
+def getDonations():
+    return TransactionHandler().getDonations()
+
+@app.route('/DisasterApp/transactions/reservations')
+def getReservations():
+    return TransactionHandler().getReservations()
 
 if __name__=='__main__':
     app.run()

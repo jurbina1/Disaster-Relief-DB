@@ -126,6 +126,15 @@ def getSellerByAnnouncementId(a_id):
 def getAvailableAnnouncements():
     return AnnouncementHandler().getAvailableAnnouncements()
 
+@app.route('/DisasterApp/announcements/resources')
+def getAllAvailableResources():
+    if request.args:
+        return AnnouncementHandler().searchAvailableResources(request.args)
+    else:
+        return AnnouncementHandler().getAllAvailableResources()
+
+
+
 
 @app.route('/DisasterApp/requests')
 def getAllRequests():
@@ -149,6 +158,7 @@ def getBuyerByRequestId(rq_id):
 @app.route('/DisasterApp/requests/active')
 def getAvailableRequests():
     return RequestHandler().getAvailableRequests()
+
 
 
 

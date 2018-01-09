@@ -112,3 +112,11 @@ class RequestDAO:
             result.append(row)
         return result
 
+    def getAllRequestedResources(self):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_name, r_category, r_type, rq_qty, rq_date from request natural inner join resource where rq_fulfillment=false order by r_name;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

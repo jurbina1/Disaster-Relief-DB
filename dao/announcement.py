@@ -111,3 +111,30 @@ class AnnouncementDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def getAllAvailableResources(self):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_name, r_category, r_type, a_qty, a_price, a_totalprice, a_available, a_date from announcement natural inner join resource where a_available>0 order by r_name;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getAvailableResourcesByCity(self, city):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_name, r_category, r_type, a_qty, a_price, a_totalprice, a_available, a_date from announcement natural inner join resource natural inner join seller natural inner join users where a_available>0 and u_city = %s order by r_name;"
+        cursor.execute(query, (city,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getAvailableResourcesByRegion(self, region):
+        cursor = self.conn.cursor()
+        query = "select r_id, r_name, r_category, r_type, a_qty, a_price, a_totalprice, a_available, a_date from announcement natural inner join resource natural inner join seller natural inner join users where a_available>0 and u_region = %s order by r_name;"
+        cursor.execute(query, (region,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

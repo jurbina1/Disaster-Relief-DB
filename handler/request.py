@@ -13,64 +13,123 @@ class RequestHandler:
         result['rq_fulfillment'] = row[5]
         return result
 
-    def build_resource_dict(self, row):
-        def build_resource_dict(self, row):
-            result = {}
-            result['r_id'] = row[0]
-            result['r_name'] = row[1]
-            if (row[2] == 1):
-                result['r_category'] = "Water"
-                if (row[3] == 1):
-                    result['r_type'] = "Bottled Water"
-                elif (row[3] == 2):
-                    result['r_type'] = "1 Gallon Water"
-            elif (row[2] == 2):
-                result['r_category'] = "Fuel"
-                if (row[3] == 1):
-                    result['r_type'] = "Diesel"
-                elif (row[3] == 2):
-                    result['r_type'] = "Gasoline"
-                else:
-                    result['r_type'] = "Propane"
-            elif (row[2] == 3):
-                result['r_category'] = "Baby Food"
-                result['r_type'] = "Baby Food"
-            elif (row[2] == 4):
-                result['r_category'] = "Medications"
-                result['r_type'] = "Medications"
-            elif (row[2] == 5):
-                result['r_category'] = "Canned Food"
-                result['r_type'] = "Canned Food"
-            elif (row[2] == 6):
-                result['r_category'] = "Dry Food"
-                result['r_type'] = "Dry Food"
-            elif (row[2] == 7):
-                result['r_category'] = "Ice"
-                result['r_type'] = "Ice"
-            elif (row[2] == 8):
-                result['r_category'] = "Medical Devices"
-                result['r_type'] = "Medical Devices"
-            elif (row[2] == 9):
-                result['r_category'] = "Heavy Equipment"
-                result['r_type'] = "Heavy Equipment"
-            elif (row[2] == 10):
-                result['r_category'] = "Tools"
-                result['r_type'] = "Tools"
-            elif (row[2] == 11):
-                result['r_category'] = "Clothing"
-                result['r_type'] = "Clothing"
-            elif (row[2] == 12):
-                result['r_category'] = "Batteries"
-                result['r_type'] = "Batteries"
+    def build_resource_requested_dict(self, row):
+        result = {}
+        result['r_id'] = row[0]
+        result['r_name'] = row[1]
+        if (row[2] == 1):
+            result['r_category'] = "Water"
+            if (row[3] == 1):
+                result['r_type'] = "Bottled Water"
+            elif (row[3] == 2):
+                result['r_type'] = "1 Gallon Water"
+        elif (row[2] == 2):
+            result['r_category'] = "Fuel"
+            if (row[3] == 1):
+                result['r_type'] = "Diesel"
+            elif (row[3] == 2):
+                result['r_type'] = "Gasoline"
             else:
-                result['r_category'] = "Power Generators"
-                if (row[3] == 1):
-                    result['r_type'] = "Diesel Power Generator"
-                elif (row[3] == 2):
-                    result['r_type'] = "Gasoline Power Generator"
-                else:
-                    result['r_type'] = "Propane Power Generator"
-            return result
+                result['r_type'] = "Propane"
+        elif (row[2] == 3):
+            result['r_category'] = "Baby Food"
+            result['r_type'] = "Baby Food"
+        elif (row[2] == 4):
+            result['r_category'] = "Medications"
+            result['r_type'] = "Medications"
+        elif (row[2] == 5):
+            result['r_category'] = "Canned Food"
+            result['r_type'] = "Canned Food"
+        elif (row[2] == 6):
+            result['r_category'] = "Dry Food"
+            result['r_type'] = "Dry Food"
+        elif (row[2] == 7):
+            result['r_category'] = "Ice"
+            result['r_type'] = "Ice"
+        elif (row[2] == 8):
+            result['r_category'] = "Medical Devices"
+            result['r_type'] = "Medical Devices"
+        elif (row[2] == 9):
+            result['r_category'] = "Heavy Equipment"
+            result['r_type'] = "Heavy Equipment"
+        elif (row[2] == 10):
+            result['r_category'] = "Tools"
+            result['r_type'] = "Tools"
+        elif (row[2] == 11):
+            result['r_category'] = "Clothing"
+            result['r_type'] = "Clothing"
+        elif (row[2] == 12):
+            result['r_category'] = "Batteries"
+            result['r_type'] = "Batteries"
+        else:
+            result['r_category'] = "Power Generators"
+            if (row[3] == 1):
+                result['r_type'] = "Diesel Power Generator"
+            elif (row[3] == 2):
+                result['r_type'] = "Gasoline Power Generator"
+            else:
+                result['r_type'] = "Propane Power Generator"
+        result['rq_qty'] = row[4]
+        result['rq_date'] = row[3]
+        return result
+
+    def build_resource_dict(self, row):
+        result = {}
+        result['r_id'] = row[0]
+        result['r_name'] = row[1]
+        if (row[2] == 1):
+            result['r_category'] = "Water"
+            if (row[3] == 1):
+                result['r_type'] = "Bottled Water"
+            elif (row[3] == 2):
+                result['r_type'] = "1 Gallon Water"
+        elif (row[2] == 2):
+            result['r_category'] = "Fuel"
+            if (row[3] == 1):
+                result['r_type'] = "Diesel"
+            elif (row[3] == 2):
+                result['r_type'] = "Gasoline"
+            else:
+                result['r_type'] = "Propane"
+        elif (row[2] == 3):
+            result['r_category'] = "Baby Food"
+            result['r_type'] = "Baby Food"
+        elif (row[2] == 4):
+            result['r_category'] = "Medications"
+            result['r_type'] = "Medications"
+        elif (row[2] == 5):
+            result['r_category'] = "Canned Food"
+            result['r_type'] = "Canned Food"
+        elif (row[2] == 6):
+            result['r_category'] = "Dry Food"
+            result['r_type'] = "Dry Food"
+        elif (row[2] == 7):
+            result['r_category'] = "Ice"
+            result['r_type'] = "Ice"
+        elif (row[2] == 8):
+            result['r_category'] = "Medical Devices"
+            result['r_type'] = "Medical Devices"
+        elif (row[2] == 9):
+            result['r_category'] = "Heavy Equipment"
+            result['r_type'] = "Heavy Equipment"
+        elif (row[2] == 10):
+            result['r_category'] = "Tools"
+            result['r_type'] = "Tools"
+        elif (row[2] == 11):
+            result['r_category'] = "Clothing"
+            result['r_type'] = "Clothing"
+        elif (row[2] == 12):
+            result['r_category'] = "Batteries"
+            result['r_type'] = "Batteries"
+        else:
+            result['r_category'] = "Power Generators"
+            if (row[3] == 1):
+                result['r_type'] = "Diesel Power Generator"
+            elif (row[3] == 2):
+                result['r_type'] = "Gasoline Power Generator"
+            else:
+                result['r_type'] = "Propane Power Generator"
+        return result
 
     def build_buyer_dict(self, row):
         result = {}
@@ -167,3 +226,16 @@ class RequestHandler:
                 result = self.build_request_dict(row)
                 result_list.append(result)
             return jsonify(Requests=result_list)
+
+    def getAllRequestedResources(self):
+        dao = RequestDAO()
+        announcement_list = dao.getAllRequestedResources()
+        if not announcement_list:
+            return jsonify(Error="Resources Not Found"), 404
+        else:
+            result_list = []
+            for row in announcement_list:
+                result = self.build_resource_requested_dict(row)
+                result_list.append(result)
+            return jsonify(Announcements=result_list)
+

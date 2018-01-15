@@ -11,6 +11,14 @@ class BankAccountHandler:
         result['ba_bank'] = row[3]
         return result
 
+    def build_bankaccount_attributes(self, ba_id, s_id, ba_number, ba_bank):
+        result = {}
+        result['ba_id'] = ba_id
+        result['s_id'] = s_id
+        result['ba_number'] = ba_number
+        result['ba_bank'] = ba_bank
+        return result
+
     def build_seller_dict(self, row):
         result = {}
         result['s_id'] = row[0]
@@ -77,3 +85,44 @@ class BankAccountHandler:
                 result = self.build_bankaccount_dict(row)
                 result_list.append(result)
             return jsonify(Bank_Accounts=result_list)
+
+    def insertBankAccount(self, form):
+        if len(form) != 3:
+            return jsonify(Error = "Malformed post request"), 400
+        else:
+            s_id = form['s_id']
+            ba_number = form['ba_number']
+            ba_bank = form['ba_bank']
+            if s_id and ba_number and ba_bank:
+                dao = BankAccountDAO()
+                ba_id = dao.insert(s_id, ba_number, ba_bank)
+                result = self.build_bankaccount_attributes(ba_id, s_id, ba_number, ba_bank)
+                return jsonify(BankAccount=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def deleteBankAccount(self, ba_id):
+        dao = BankAccountDAO()
+        if not dao.getBankAccountById(ba_id):
+            return jsonify(Error = "BankAccount not found."), 404
+        else:
+            dao.delete(ba_id)
+            return jsonify(DeleteStatus = "OK"), 200
+
+    def updateBankAccount(self, ba_id, form):
+        dao = BankAccountDAO()
+        if not dao.getBankAccountById(ba_id):
+            return jsonify(Error = "BankAccount not found."), 404
+        else:
+            if len(form) != 3:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                s_id = form['s_id']
+                ba_number = form['ba_number']
+                ba_bank = form['ba_bank']
+                if s_id and ba_number and ba_bank:
+                    dao.update(ba_id, s_id, ba_number, ba_bank)
+                    result = self.build_bankaccount_attributes(ba_id, s_id, ba_number, ba_bank)
+                    return jsonify(BankAccount=result), 200
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400

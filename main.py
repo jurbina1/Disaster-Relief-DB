@@ -28,25 +28,48 @@ def help():
            '/creditcards<br/>' \
            '/transactions'
 
-@app.route('/DisasterApp/administrators')
+@app.route('/DisasterApp/administrators', methods=['GET', 'POST'])
 def getAllAdmins():
+    if request.method == 'POST':
+        return AdminHandler().insertAdmin(request.form)
+    else:
         return AdminHandler().getAllAdmins()
 
 
-@app.route('/DisasterApp/administrators/<int:admin_id>')
+@app.route('/DisasterApp/administrators/<int:admin_id>', methods=['GET', 'PUT', 'DELETE'])
 def getAdminById(admin_id):
+    if request.method == 'GET':
         return AdminHandler().getAdminById(admin_id)
-
-@app.route('/DisasterApp/resources')
-def getAllResources():
-    if not request.args:
-        return ResourceHandler().getAllResources()
+    elif request.method == 'PUT':
+        return AdminHandler().updateAdmin(admin_id, request.form)
+    elif request.method == 'DELETE':
+        return AdminHandler().deleteAdmin(admin_id)
     else:
-        return ResourceHandler().searchResource(request.args)
+        return jsonify(Error="Method not allowed."), 405
 
-@app.route('/DisasterApp/resources/<int:r_id>')
+
+
+
+@app.route('/DisasterApp/resources', methods=['GET', 'POST'])
+def getAllResources():
+    if request.method == 'POST':
+        return ResourceHandler().insertResource(request.form)
+    else:
+        if not request.args:
+            return ResourceHandler().getAllResources()
+        else:
+            return ResourceHandler().searchResource(request.args)
+
+@app.route('/DisasterApp/resources/<int:r_id>', methods=['GET', 'PUT', 'DELETE'])
 def getResourceById(r_id):
-    return ResourceHandler().getResourceById(r_id)
+    if request.method == 'GET':
+        return ResourceHandler().getResourceById(r_id)
+    elif request.method == 'PUT':
+        return ResourceHandler().updateResource(r_id, request.form)
+    elif request.method == 'DELETE':
+        return ResourceHandler().deleteResource(r_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/resources/<int:r_id>/sellers')
 def getSellersByResourceId(r_id):
@@ -59,16 +82,26 @@ def getBuyersByResourceId(r_id):
 
 
 
-@app.route('/DisasterApp/buyers')
+@app.route('/DisasterApp/buyers', methods=['GET', 'POST'])
 def getAllBuyers():
-    if not request.args:
-        return BuyerHandler().getAllBuyers()
+    if request.method == 'POST':
+        return BuyerHandler().insertBuyer(request.form)
     else:
-        return BuyerHandler().searchBuyers(request.args)
+        if not request.args:
+            return BuyerHandler().getAllBuyers()
+        else:
+            return BuyerHandler().searchBuyers(request.args)
 
-@app.route('/DisasterApp/buyers/<int:b_id>')
+@app.route('/DisasterApp/buyers/<int:b_id>', methods=['GET', 'PUT', 'DELETE'])
 def getBuyerById(b_id):
-    return BuyerHandler().getBuyerById(b_id)
+    if request.method == 'GET':
+        return BuyerHandler().getBuyerById(b_id)
+    elif request.method == 'PUT':
+        return BuyerHandler().updateBuyer(b_id, request.form)
+    elif request.method == 'DELETE':
+        return BuyerHandler().deleteBuyer(b_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/buyers/<int:b_id>/requests')
 def getResourcesByBuyerId(b_id):
@@ -81,16 +114,26 @@ def getTransactionsByBuyerId(b_id):
 
 
 
-@app.route('/DisasterApp/sellers')
+@app.route('/DisasterApp/sellers', methods=['GET', 'POST'])
 def getAllSellers():
-    if not request.args:
-        return SellerHandler().getAllSellers()
+    if request.method == 'POST':
+        return SellerHandler().insertSeller(request.form)
     else:
-        return SellerHandler().searchSeller(request.args)
+        if not request.args:
+            return SellerHandler().getAllSellers()
+        else:
+            return SellerHandler().searchSeller(request.args)
 
-@app.route('/DisasterApp/sellers/<int:s_id>')
+@app.route('/DisasterApp/sellers/<int:s_id>', methods=['GET', 'PUT', 'DELETE'])
 def getSellerById(s_id):
-    return SellerHandler().getSellerById(s_id)
+    if request.method == 'GET':
+        return SellerHandler().getSellerById(s_id)
+    elif request.method == 'PUT':
+        return SellerHandler().updateSeller(s_id, request.form)
+    elif request.method == 'DELETE':
+        return SellerHandler().deleteSeller(s_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/sellers/<int:s_id>/announcements')
 def getResourcesBySellerId(s_id):
@@ -103,16 +146,26 @@ def getTransactionsBySellerId(s_id):
 
 
 
-@app.route('/DisasterApp/announcements')
+@app.route('/DisasterApp/announcements', methods=['GET', 'POST'])
 def getAllAnnouncements():
-    if not request.args:
-        return AnnouncementHandler().getAllAnnouncements()
+    if request.method == 'POST':
+        return AnnouncementHandler().insertAnnouncement(request.form)
     else:
-        return AnnouncementHandler().searchAnnouncement(request.args)
+        if not request.args:
+            return AnnouncementHandler().getAllAnnouncements()
+        else:
+            return AnnouncementHandler().searchAnnouncement(request.args)
 
-@app.route('/DisasterApp/announcements/<int:a_id>')
+@app.route('/DisasterApp/announcements/<int:a_id>', methods=['GET', 'PUT', 'DELETE'])
 def getAnnouncementById(a_id):
-    return AnnouncementHandler().getAnnouncementById(a_id)
+    if request.method == 'GET':
+        return AnnouncementHandler().getAnnouncementById(a_id)
+    elif request.method == 'PUT':
+        return AnnouncementHandler().updateAnnouncement(a_id, request.form)
+    elif request.method == 'DELETE':
+        return AnnouncementHandler().deleteAnnouncement(a_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/announcements/<int:a_id>/resource')
 def getResourcesByAnnouncementId(a_id):
@@ -136,16 +189,26 @@ def getAllAvailableResources():
 
 
 
-@app.route('/DisasterApp/requests')
+@app.route('/DisasterApp/requests', methods=['GET', 'POST'])
 def getAllRequests():
-    if not request.args:
-        return RequestHandler().getAllRequests()
+    if request.method == 'POST':
+        return RequestHandler().insertRequest(request.form)
     else:
-        return RequestHandler().searchRequest(request.args)
+        if not request.args:
+            return RequestHandler().getAllRequests()
+        else:
+            return RequestHandler().searchRequest(request.args)
 
-@app.route('/DisasterApp/requests/<int:rq_id>')
+@app.route('/DisasterApp/requests/<int:rq_id>', methods=['GET', 'PUT', 'DELETE'])
 def getRequestById(rq_id):
-    return RequestHandler().getRequestById(rq_id)
+    if request.method == 'GET':
+        return RequestHandler().getRequestById(rq_id)
+    elif request.method == 'PUT':
+        return RequestHandler().updateRequest(rq_id, request.form)
+    elif request.method == 'DELETE':
+        return RequestHandler().deleteRequest(rq_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/requests/<int:rq_id>/resource')
 def getResourcesByRequestId(rq_id):
@@ -163,16 +226,26 @@ def getAvailableRequests():
 
 
 
-@app.route('/DisasterApp/bankaccounts')
+@app.route('/DisasterApp/bankaccounts', methods=['GET', 'POST'])
 def getAllBankAccounts():
-    if not request.args:
-        return BankAccountHandler().getAllBankAccounts()
+    if request.method == 'POST':
+        return BankAccountHandler().insertBankAccount(request.form)
     else:
-        return BankAccountHandler().searchBankAccounts(request.args)
+        if not request.args:
+            return BankAccountHandler().getAllBankAccounts()
+        else:
+            return BankAccountHandler().searchBankAccounts(request.args)
 
-@app.route('/DisasterApp/bankaccounts/<int:ba_id>')
+@app.route('/DisasterApp/bankaccounts/<int:ba_id>', methods=['GET', 'PUT', 'DELETE'])
 def getBankAccountById(ba_id):
-    return BankAccountHandler().getBankAccountById(ba_id)
+    if request.method == 'GET':
+        return BankAccountHandler().getBankAccountById(ba_id)
+    elif request.method == 'PUT':
+        return BankAccountHandler().updateBankAccount(ba_id, request.form)
+    elif request.method == 'DELETE':
+        return BankAccountHandler().deleteBankAccount(ba_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/bankaccounts/<int:ba_id>/seller')
 def getSellerByBankAccountId(ba_id):
@@ -181,16 +254,26 @@ def getSellerByBankAccountId(ba_id):
 
 
 
-@app.route('/DisasterApp/creditcards')
+@app.route('/DisasterApp/creditcards', methods=['GET', 'POST'])
 def getAllCreditCards():
-    if not request.args:
-        return CreditCardHandler().getAllCreditCards()
+    if request.method == 'POST':
+        return CreditCardHandler().insertCreditCard(request.form)
     else:
-        return CreditCardHandler().searchCreditCards(request.args)
+        if not request.args:
+            return CreditCardHandler().getAllCreditCards()
+        else:
+            return CreditCardHandler().searchCreditCards(request.args)
 
-@app.route('/DisasterApp/creditcards/<int:c_id>')
+@app.route('/DisasterApp/creditcards/<int:c_id>', methods=['GET', 'PUT', 'DELETE'])
 def getCreditCardById(c_id):
-    return CreditCardHandler().getCreditCardById(c_id)
+    if request.method == 'GET':
+        return CreditCardHandler().getCreditCardById(c_id)
+    elif request.method == 'PUT':
+        return CreditCardHandler().updateCreditCard(c_id, request.form)
+    elif request.method == 'DELETE':
+        return CreditCardHandler().deleteCreditCard(c_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/creditcards/<int:c_id>/buyer')
 def getBuyerByCreditCardId(c_id):
@@ -199,16 +282,26 @@ def getBuyerByCreditCardId(c_id):
 
 
 
-@app.route('/DisasterApp/transactions')
+@app.route('/DisasterApp/transactions', methods=['GET', 'POST'])
 def getAllTransactions():
-    if not request.args:
-        return TransactionHandler().getAllTransactions()
+    if request.method == 'POST':
+        return TransactionHandler().insertTransaction(request.form)
     else:
-        return TransactionHandler().searchTransactions(request.args)
+        if not request.args:
+            return TransactionHandler().getAllTransactions()
+        else:
+            return TransactionHandler().searchTransactions(request.args)
 
-@app.route('/DisasterApp/transactions/<int:t_id>')
+@app.route('/DisasterApp/transactions/<int:t_id>', methods=['GET', 'PUT', 'DELETE'])
 def getTransactionById(t_id):
-    return TransactionHandler().getTransactionById(t_id)
+    if request.method == 'GET':
+        return TransactionHandler().getTransactionById(t_id)
+    elif request.method == 'PUT':
+        return TransactionHandler().updateTransaction(t_id, request.form)
+    elif request.method == 'DELETE':
+        return TransactionHandler().deleteTransaction(t_id)
+    else:
+        return jsonify(Error="Method not allowed."), 405
 
 @app.route('/DisasterApp/transactions/<int:t_id>/resource')
 def getResourcesByTransactionId(t_id):

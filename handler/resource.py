@@ -65,55 +65,55 @@ class ResourceHandler:
         result = {}
         result['r_id'] = r_id
         result['r_name'] = r_name
-        if (r_category == 1):
+        if (r_category == '1'):
             result['r_category'] = "Water"
-            if (r_type == 1):
+            if (r_type == '1'):
                 result['r_type'] = "Bottled Water"
-            elif (r_type == 2):
+            elif (r_type == '2'):
                 result['r_type'] = "1 Gallon Water"
-        elif (r_category == 2):
+        elif (r_category == '2'):
             result['r_category'] = "Fuel"
-            if (r_type == 1):
+            if (r_type == '1'):
                 result['r_type'] = "Diesel"
-            elif (r_type == 2):
+            elif (r_type == '2'):
                 result['r_type'] = "Gasoline"
             else:
                 result['r_type'] = "Propane"
-        elif (r_category == 3):
+        elif (r_category == '3'):
             result['r_category'] = "Baby Food"
             result['r_type'] = "Baby Food"
-        elif (r_category == 4):
+        elif (r_category == '4'):
             result['r_category'] = "Medications"
             result['r_type'] = "Medications"
-        elif (r_category == 5):
+        elif (r_category == '5'):
             result['r_category'] = "Canned Food"
             result['r_type'] = "Canned Food"
-        elif (r_category == 6):
+        elif (r_category == '6'):
             result['r_category'] = "Dry Food"
             result['r_type'] = "Dry Food"
-        elif (r_category == 7):
+        elif (r_category == '7'):
             result['r_category'] = "Ice"
             result['r_type'] = "Ice"
-        elif (r_category == 8):
+        elif (r_category == '8'):
             result['r_category'] = "Medical Devices"
             result['r_type'] = "Medical Devices"
-        elif (r_category == 9):
+        elif (r_category == '9'):
             result['r_category'] = "Heavy Equipment"
             result['r_type'] = "Heavy Equipment"
-        elif (r_category == 10):
+        elif (r_category == '10'):
             result['r_category'] = "Tools"
             result['r_type'] = "Tools"
-        elif (r_category == 11):
+        elif (r_category == '11'):
             result['r_category'] = "Clothing"
             result['r_type'] = "Clothing"
-        elif (r_category == 12):
+        elif (r_category == '12'):
             result['r_category'] = "Batteries"
             result['r_type'] = "Batteries"
         else:
             result['r_category'] = "Power Generators"
-            if (r_type == 1):
+            if (r_type == '1'):
                 result['r_type'] = "Diesel Power Generator"
-            elif (r_type == 2):
+            elif (r_type == '2'):
                 result['r_type'] = "Gasoline Power Generator"
             else:
                 result['r_type'] = "Propane Power Generator"

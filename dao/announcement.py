@@ -155,7 +155,7 @@ class AnnouncementDAO:
 
     def insert(self, s_id, r_id, a_qty, a_price, a_totalprice, a_available):
         cursor = self.conn.cursor()
-        query = "insert into parts(s_id, r_id, a_qty, a_price, a_totalprice, a_available) values (%s, %s, %s, %s, %s, %s) returning a_id;"
+        query = "insert into announcement(s_id, r_id, a_qty, a_price, a_totalprice, a_available) values (%s, %s, %s, %s, %s, %s) returning a_id;"
         cursor.execute(query, (s_id, r_id, a_qty, a_price, a_totalprice, a_available,))
         a_id = cursor.fetchone()[0]
         self.conn.commit()

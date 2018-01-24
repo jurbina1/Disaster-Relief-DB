@@ -109,14 +109,14 @@ class SellerDAO:
 
     def update(self, s_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age):
         cursor = self.conn.cursor()
-        query = "with value as (select u_id from seller where s_id = %s) update users set u_name = %s, u_lastname = %s, u_email = %s, u_password = %s, u_address = %s, u_city = %s, u_region = %s, u_phone = %s, u_age, u_phone = %s, u_age = %s where u_id = (select u_id from value);"
+        query = "with value as (select u_id from seller where s_id = %s) update users set u_name = %s, u_lastname = %s, u_email = %s, u_password = %s, u_address = %s, u_city = %s, u_region = %s, u_phone = %s, u_age = %s where u_id = (select u_id from value);"
         cursor.execute(query, (s_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age,))
         self.conn.commit()
         return s_id
 
     def delete(self, s_id):
         cursor = self.conn.cursor()
-        query = "delete from seller where pid = %s;"
+        query = "delete from seller where s_id = %s;"
         cursor.execute(query, (s_id,))
         self.conn.commit()
         return s_id

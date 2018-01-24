@@ -299,7 +299,7 @@ class TransactionHandler:
         return jsonify(BankAccount=result)
 
     def insertTransaction(self, form):
-        if len(form) != 10:
+        if len(form) != 9:
             return jsonify(Error = "Malformed post Transaction"), 400
         else:
             s_id = form['s_id']
@@ -332,7 +332,7 @@ class TransactionHandler:
         if not dao.getTransactionById(t_id):
             return jsonify(Error = "Transaction not found."), 404
         else:
-            if len(form) != 10:
+            if len(form) != 9:
                 return jsonify(Error="Malformed update Transaction"), 400
             else:
                 s_id = form['s_id']

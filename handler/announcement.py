@@ -276,7 +276,7 @@ class AnnouncementHandler:
             return jsonify(Resources=result_list)
 
     def insertAnnouncement(self, form):
-        if len(form) != 7:
+        if len(form) != 6:
             return jsonify(Error = "Malformed post request"), 400
         else:
             s_id = form['s_id']
@@ -306,7 +306,7 @@ class AnnouncementHandler:
         if not dao.getAnnouncementById(a_id):
             return jsonify(Error = "Announcement not found."), 404
         else:
-            if len(form) != 7:
+            if len(form) != 6:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 s_id = form['s_id']

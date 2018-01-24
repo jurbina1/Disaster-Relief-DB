@@ -24,7 +24,7 @@ class AdminDAO:
 
     def getAdminById(self, admin_id):
             cursor = self.conn.cursor()
-            query = "select admin_id, u_name, u_lastname, u_email, u_password, u_region, u_phone, u_age from admin natural inner join users where admin_id = %s;"
+            query = "select admin_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age from admin natural inner join users where admin_id = %s;"
             cursor.execute(query, (admin_id,))
             result = cursor.fetchone()
             print(result)
@@ -47,7 +47,7 @@ class AdminDAO:
 
     def update(self, admin_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age):
         cursor = self.conn.cursor()
-        query = "with value as (select u_id from admin where admin_id = %s) update users set u_name = %s, u_lastname = %s, u_email = %s, u_password = %s, u_address = %s, u_city = %s, u_region = %s, u_phone = %s, u_age, u_phone = %s, u_age = %s where u_id = (select u_id from value);"
+        query = "with value as (select u_id from admin where admin_id = %s) update users set u_name = %s, u_lastname = %s, u_email = %s, u_password = %s, u_address = %s, u_city = %s, u_region = %s, u_phone = %s, u_age = %s where u_id = (select u_id from value);"
         cursor.execute(query, (admin_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age,))
         self.conn.commit()
         return admin_id

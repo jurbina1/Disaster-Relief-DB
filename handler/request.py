@@ -249,7 +249,7 @@ class RequestHandler:
             return jsonify(Announcements=result_list)
 
     def insertRequest(self, form):
-        if len(form) != 5:
+        if len(form) != 4:
             return jsonify(Error = "Malformed post request"), 400
         else:
             b_id = form['b_id']
@@ -277,7 +277,7 @@ class RequestHandler:
         if not dao.getRequestById(rq_id):
             return jsonify(Error = "Request not found."), 404
         else:
-            if len(form) != 5:
+            if len(form) != 4:
                 return jsonify(Error="Malformed update request"), 400
             else:
                 b_id = form['b_id']

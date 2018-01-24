@@ -108,3 +108,25 @@ class BuyerDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def update(self, b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age):
+        cursor = self.conn.cursor()
+        query = "with value as (select u_id from buyer where b_id = %s) update users set u_name = %s, u_lastname = %s, u_email = %s, u_password = %s, u_address = %s, u_city = %s, u_region = %s, u_phone = %s, u_age, u_phone = %s, u_age = %s where u_id = (select u_id from value);"
+        cursor.execute(query,(b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age,))
+        self.conn.commit()
+        return b_id
+
+    def delete(self, b_id):
+        cursor = self.conn.cursor()
+        query = "delete from buyer where b_id = %s;"
+        cursor.execute(query, (b_id,))
+        self.conn.commit()
+        return b_id
+
+    def insert(self, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age):
+        cursor = self.conn.cursor()
+        query = "with value as (insert into users(u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age) values(%s, %s, %s, %s, %s, %s, %s, %s, %s) returning u_id) insert into buyer (u_id) select u_id from value returning b_id;"
+        cursor.execute(query, (u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age,))
+        b_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return b_id

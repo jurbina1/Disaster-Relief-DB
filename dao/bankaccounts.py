@@ -59,3 +59,25 @@ class BankAccountDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def update(self, ba_id, s_id, ba_number, ba_bank):
+        cursor = self.conn.cursor()
+        query = "update bankaccount set s_id = %s, ba_number = %s, ba_bank = %s where ba_id = %s;"
+        cursor.execute(query, (s_id, ba_number, ba_bank,  ba_id,))
+        self.conn.commit()
+        return ba_id
+
+    def delete(self, ba_id):
+        cursor = self.conn.cursor()
+        query = "delete from bankaccount where ba_id = %s;"
+        cursor.execute(query, (ba_id,))
+        self.conn.commit()
+        return ba_id
+
+    def insert(self, s_id, ba_number, ba_bank):
+        cursor = self.conn.cursor()
+        query = "insert into bankaccount(s_id, ba_number, ba_bank) values (%s, %s, %s) returning ba_id;"
+        cursor.execute(query, (s_id, ba_number, ba_bank,))
+        ba_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return ba_id

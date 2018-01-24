@@ -230,7 +230,7 @@ class BuyerHandler:
                 u_age = form['u_age']
                 if u_name and u_lastname and u_email and u_password and u_address and u_city and u_region and u_phone and u_age:
                     dao = BuyerDAO()
-                    dao.update(u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
+                    dao.update(b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
                     result = self.build_buyer_attributes(b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
                     return jsonify(Buyer=result), 201
                 else:

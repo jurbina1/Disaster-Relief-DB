@@ -204,12 +204,12 @@ class SellerHandler:
             else:
                 return jsonify(Error="Unexpected attributes in post Seller"), 400
 
-    def deleteSeller(self, Seller_id):
+    def deleteSeller(self, s_id):
         dao = SellerDAO()
-        if not dao.getSellerById(Seller_id):
+        if not dao.getSellerById(s_id):
             return jsonify(Error = "Seller not found."), 404
         else:
-            dao.delete(Seller_id)
+            dao.delete(s_id)
             return jsonify(DeleteStatus = "OK"), 200
 
     def updateSeller(self, s_id, form):

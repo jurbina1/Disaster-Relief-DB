@@ -61,7 +61,7 @@ class ResourceHandler:
                 result['r_type'] = "Propane Power Generator"
         return result
 
-    def build_resource_attributes(r_id, r_name, r_category, r_type):
+    def build_resource_attributes(self, r_id, r_name, r_category, r_type):
         result = {}
         result['r_id'] = r_id
         result['r_name'] = r_name

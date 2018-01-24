@@ -138,3 +138,25 @@ class AnnouncementDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def update(self, a_id, s_id, r_id, a_qty, a_price, a_totalprice, a_available):
+        cursor = self.conn.cursor()
+        query = "update announcement set s_id = %s, r_id = %s, a_qty = %s, a_price = %s, a_totalprice = %s, a_available = %s where a_id = %s;"
+        cursor.execute(query, (s_id, r_id, a_qty, a_price, a_totalprice, a_available, a_id,))
+        self.conn.commit()
+        return a_id
+
+    def delete(self, a_id):
+        cursor = self.conn.cursor()
+        query = "delete from announcement where a_id = %s;"
+        cursor.execute(query, (a_id,))
+        self.conn.commit()
+        return a_id
+
+    def insert(self, s_id, r_id, a_qty, a_price, a_totalprice, a_available):
+        cursor = self.conn.cursor()
+        query = "insert into parts(s_id, r_id, a_qty, a_price, a_totalprice, a_available) values (%s, %s, %s, %s, %s, %s) returning a_id;"
+        cursor.execute(query, (s_id, r_id, a_qty, a_price, a_totalprice, a_available,))
+        a_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return a_id

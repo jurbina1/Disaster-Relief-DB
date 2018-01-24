@@ -189,3 +189,25 @@ class TransactionDAO:
         cursor.execute(query, (t_id,))
         result = cursor.fetchone()
         return result
+
+    def update(self, t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation):
+        cursor = self.conn.cursor()
+        query = "update transaction set s_id = %s, b_id= %s, ba_id= %s, c_id= %s, r_id= %s, t_qty= %s, t_total= %s, t_donation= %s, t_reservation= %s where t_id = %s;"
+        cursor.execute(query, (s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation, t_id,))
+        self.conn.commit()
+        return t_id
+
+    def delete(self, t_id):
+        cursor = self.conn.cursor()
+        query = "delete from transaction where t_id = %s;"
+        cursor.execute(query, (t_id,))
+        self.conn.commit()
+        return t_id
+
+    def insert(self, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation):
+        cursor = self.conn.cursor()
+        query = "insert into transaction(s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation) values (%s, %s, %s, %s, %s, %s, %s, %s, %s) returning t_id;"
+        cursor.execute(query, (s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation,))
+        t_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return t_id

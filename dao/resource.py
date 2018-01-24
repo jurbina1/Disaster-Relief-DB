@@ -107,3 +107,12 @@ class ResourceDAO:
                 result.append(row)
             return result
 
+    def update(self, r_id, r_name, r_category, r_type):
+        pass
+
+    def insert(self, r_name, r_category, r_type):
+        pass
+
+    def delete(self, r_id):
+        pass
+

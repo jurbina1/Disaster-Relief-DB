@@ -3,6 +3,38 @@ from dao.resource import ResourceDAO
 
 
 class ResourceHandler:
+
+    def build_stat_dict(self,row):
+        result=[]
+        if (row[0] == 1):
+            result.append("Water")
+        elif (row[0] == 2):
+            result.append("Fuel")
+        elif (row[0] == 3):
+            result.append("Baby Food")
+        elif (row[0] == 4):
+            result.append("Medications")
+        elif (row[0] == 5):
+            result.append("Canned Food")
+        elif (row[0] == 6):
+            result.append("Dry Food")
+        elif (row[0] == 7):
+            result.append("Ice")
+        elif (row[0] == 8):
+            result.append("Medical Devices")
+        elif (row[0] == 9):
+            result.append("Heavy Equipment")
+        elif (row[0] == 10):
+            result.append("Tools")
+        elif (row[0] == 11):
+            result.append("Clothing")
+        elif (row[0] == 12):
+            result.append("Batteries")
+        else:
+            result.append("Power Generators")
+        result.append(int(row[1]))
+        return result
+
     def build_resource_dict(self, row):
         result = {}
         result['r_id'] = row[0]
@@ -264,3 +296,226 @@ class ResourceHandler:
                     return jsonify(Resource=result), 201
                 else:
                     return jsonify(Error="Unexpected attributes in update Resource"), 400
+
+    def getStatistic(self):
+        dao= ResourceDAO()
+        result_list = []
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getDNStats()
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getDAStats()
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getDMStats()
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getWNStats()
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getWAStats()
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getWMStats()
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("Ponce")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("Ponce")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("Ponce")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("Arecibo")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("Arecibo")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("Arecibo")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("Mayaguez")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("Mayaguez")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("Mayaguez")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("Caguas")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("Caguas")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("Caguas")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("Bayamon")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("Bayamon")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("Bayamon")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("San Juan")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("San Juan")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("San Juan")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Needed'])
+        resources_list = dao.getRNStats("Humacao")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Available'])
+        resources_list = dao.getRAStats("Humacao")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+        result = []
+        result.append(['Resources', 'Matching'])
+        resources_list = dao.getRMStats("Humacao")
+        for row in resources_list:
+            temp = self.build_stat_dict(row)
+            result.append(temp)
+        result_list.append(result)
+
+
+        return result_list

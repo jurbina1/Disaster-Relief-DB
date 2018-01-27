@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from handler.resource import ResourceHandler
 from handler.buyer import BuyerHandler
 from handler.seller import SellerHandler
@@ -13,11 +13,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Welcome to the Disaster Relief App!'
-
-@app.route('/DisasterApp')
-def help():
-    return 'The possible URLs are: <br/>' \
+    return 'Welcome to the Disaster Relief App!<br/>' \
+           'The possible URLs are: <br/>' \
            '/administrators<br/>' \
            '/resources<br/>' \
            '/buyers<br/>' \
@@ -27,6 +24,14 @@ def help():
            '/bankaccounts<br/>' \
            '/creditcards<br/>' \
            '/transactions'
+
+
+@app.route('/DisasterApp')
+def dashboard():
+    result = ResourceHandler().getStatistic()
+    return render_template('dashboard.html', stats=result)
+
+
 
 @app.route('/DisasterApp/administrators', methods=['GET', 'POST'])
 def getAllAdmins():

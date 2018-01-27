@@ -129,3 +129,83 @@ class ResourceDAO:
         self.conn.commit()
         return r_id
 
+    def getDNStats(self):
+        cursor = self.conn.cursor()
+        query = "select r_category, sum(rq_qty) from request natural inner join resource where rq_fulfillment = false group by r_category;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getDAStats(self):
+        cursor = self.conn.cursor()
+        query = "select r_category, sum(a_available) from announcement natural inner join resource where a_available > 0 group by r_category;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getDMStats(self):
+        cursor = self.conn.cursor()
+        query = "select r_category, least(SA, SQ) from (select r_category, sum(a_available) SA, sum(rq_qty) as SQ from announcement natural inner join resource natural inner join request where a_available > 0 and rq_fulfillment = false group by r_category) as t1;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getWNStats(self):
+        cursor = self.conn.cursor()
+        query = "select r_category, sum(rq_qty) from request natural inner join resource where rq_date > '01-24-2018' or rq_fulfillment = false group by r_category;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getWAStats(self):
+        cursor = self.conn.cursor()
+        query = "select r_category, sum(case when a_date > '01-24-2018' then a_qty else a_available end) from announcement natural inner join resource where a_date > '01-24-2018' or a_available > 0 group by r_category;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getWMStats(self):
+        cursor = self.conn.cursor()
+        query = "select r_category, least(SA, SQ) from (select r_category, sum(case when a_date > '01-24-2018' then a_qty else a_available end) SA, sum(rq_qty) SQ from announcement natural inner join resource natural inner join request where (a_date > '01-24-2018' or a_available > 0) and (rq_date > '01-24-2018' or rq_fulfillment = false) group by r_category) as t1;"
+        cursor.execute(query)
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getRNStats(self, u_region):
+        cursor = self.conn.cursor()
+        query = "select r_category, sum(rq_qty) from request natural inner join resource natural inner join buyer natural inner join users where rq_fulfillment = false and u_region = %s group by r_category;"
+        cursor.execute(query, (u_region,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getRAStats(self, u_region):
+        cursor = self.conn.cursor()
+        query = "select r_category, sum(a_available) from announcement natural inner join resource natural inner join seller natural inner join users where a_available > 0 and u_region = %s group by r_category;"
+        cursor.execute(query, (u_region,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result
+
+    def getRMStats(self, u_region):
+        cursor = self.conn.cursor()
+        query = "select r_category, least(SA, SQ) from (select r_category, sum(a_available) SA, sum(rq_qty) SQ from request natural inner join resource natural inner join announcement natural inner join (select s_id, u_region s_region from users natural inner join seller) as T1 natural inner join (select b_id, u_region b_region from users natural inner join buyer) as T2 where s_region = %s and b_region = %s group by r_category) as t1;"
+        cursor.execute(query, (u_region, u_region,))
+        result = []
+        for row in cursor:
+            result.append(row)
+        return result

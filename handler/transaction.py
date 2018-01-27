@@ -18,6 +18,21 @@ class TransactionHandler:
         result['t_reservation'] = row[10]
         return result
 
+    def build_transaction_attributes(self, t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation):
+        result = {}
+        result['t_id'] = t_id
+        result['s_id'] = s_id
+        result['b_id'] = b_id
+        result['ba_id'] = ba_id
+        result['c_id'] = c_id
+        result['r_id'] = r_id
+        result['t_qty'] = t_qty
+        result['t_total'] = t_total
+        result['t_donation'] = t_donation
+        result['t_reservation'] = t_reservation
+        return result
+
+
     def build_buyer_dict(self, row):
         result = {}
         result['b_id'] = row[0]
@@ -282,3 +297,57 @@ class TransactionHandler:
         else:
             result = self.build_bankaccount_dict(transaction_list)
         return jsonify(BankAccount=result)
+
+    def insertTransaction(self, form):
+        if len(form) != 9:
+            return jsonify(Error = "Malformed post Transaction"), 400
+        else:
+            s_id = form['s_id']
+            b_id = form['b_id']
+            ba_id = form['ba_id']
+            c_id = form['c_id']
+            r_id = form['r_id']
+            t_qty = form['t_qty']
+            t_total = form['t_total']
+            t_donation = form['t_donation']
+            t_reservation = form['t_reservation']
+            if s_id and b_id and ba_id and c_id and r_id and t_qty and t_total and t_donation and t_reservation:
+                dao = TransactionDAO()
+                t_id = dao.insert(s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation)
+                result = self.build_transaction_attributes(t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation)
+                return jsonify(Transaction=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post Transaction"), 400
+
+    def deleteTransaction(self, t_id):
+        dao = TransactionDAO()
+        if not dao.getTransactionById(t_id):
+            return jsonify(Error = "Transaction not found."), 404
+        else:
+            dao.delete(t_id)
+            return jsonify(DeleteStatus = "OK"), 200
+
+    def updateTransaction(self, t_id, form):
+        dao = TransactionDAO()
+        if not dao.getTransactionById(t_id):
+            return jsonify(Error = "Transaction not found."), 404
+        else:
+            if len(form) != 9:
+                return jsonify(Error="Malformed update Transaction"), 400
+            else:
+                s_id = form['s_id']
+                b_id = form['b_id']
+                ba_id = form['ba_id']
+                c_id = form['c_id']
+                r_id = form['r_id']
+                t_qty = form['t_qty']
+                t_total = form['t_total']
+                t_donation = form['t_donation']
+                t_reservation = form['t_reservation']
+                if s_id and b_id and ba_id and c_id and r_id and t_qty and t_total and t_donation and t_reservation:
+                    dao = TransactionDAO()
+                    dao.update(t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation)
+                    result = self.build_transaction_attributes(t_id, s_id, b_id, ba_id, c_id, r_id, t_qty, t_total, t_donation, t_reservation)
+                    return jsonify(Transaction=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in update Transaction"), 400

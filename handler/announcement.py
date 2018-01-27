@@ -15,6 +15,16 @@ class AnnouncementHandler:
         result['a_date'] = row[7]
         return result
 
+    def build_announcement_attributes(self, a_id, s_id, r_id, a_qty, a_price, a_totalprice, a_available):
+        result = {}
+        result['a_id'] = a_id
+        result['s_id'] = s_id
+        result['r_id'] = r_id
+        result['a_qty'] = a_qty
+        result['a_price'] = a_price
+        result['a_totalprice'] = a_totalprice
+        result['a_available'] = a_available
+        return result
 
     def build_resource_announced_dict(self, row):
         result = {}
@@ -265,4 +275,50 @@ class AnnouncementHandler:
                 result_list.append(result)
             return jsonify(Resources=result_list)
 
+    def insertAnnouncement(self, form):
+        if len(form) != 6:
+            return jsonify(Error = "Malformed post request"), 400
+        else:
+            s_id = form['s_id']
+            r_id = form['r_id']
+            a_qty = form['a_qty']
+            a_price = form['a_price']
+            a_totalprice = form['a_totalprice']
+            a_available = form['a_available']
+            if s_id and r_id and a_qty and a_price and a_totalprice and a_available:
+                dao = AnnouncementDAO()
+                a_id = dao.insert(s_id, r_id, a_qty, a_price, a_totalprice, a_available)
+                result = self.build_announcement_attributes(a_id, s_id, r_id, a_qty, a_price, a_totalprice, a_available)
+                return jsonify(Announcement=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def deleteAnnouncement(self, a_id):
+        dao = AnnouncementDAO()
+        if not dao.getAnnouncementById(a_id):
+            return jsonify(Error = "Announcement not found."), 404
+        else:
+            dao.delete(a_id)
+            return jsonify(DeleteStatus = "OK"), 200
+
+    def updateAnnouncement(self, a_id, form):
+        dao = AnnouncementDAO()
+        if not dao.getAnnouncementById(a_id):
+            return jsonify(Error = "Announcement not found."), 404
+        else:
+            if len(form) != 6:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                s_id = form['s_id']
+                r_id = form['r_id']
+                a_qty = form['a_qty']
+                a_price = form['a_price']
+                a_totalprice = form['a_totalprice']
+                a_available = form['a_available']
+                if s_id and r_id and a_qty and a_price and a_totalprice and a_available:
+                    dao.update(a_id, s_id, r_id, a_qty, a_price, a_totalprice, a_available)
+                    result = self.build_announcement_attributes(a_id, s_id, r_id, a_qty, a_price, a_totalprice, a_available)
+                    return jsonify(Announcement=result), 200
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400
 

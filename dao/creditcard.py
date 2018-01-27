@@ -59,3 +59,25 @@ class CreditCardDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def update(self, c_id, b_id, c_name, c_number, c_cvv, c_expdate):
+        cursor = self.conn.cursor()
+        query = "update creditcard set b_id = %s, c_name = %s, c_number = %s, c_cvv = %s, c_expdate = %s where c_id = %s;"
+        cursor.execute(query, (b_id, c_name, c_number, c_cvv, c_expdate, c_id,))
+        self.conn.commit()
+        return c_id
+
+    def delete(self, c_id):
+        cursor = self.conn.cursor()
+        query = "delete from creditcard where c_id = %s;"
+        cursor.execute(query, (c_id,))
+        self.conn.commit()
+        return c_id
+
+    def insert(self, b_id, c_name, c_number, c_cvv, c_expdate):
+        cursor = self.conn.cursor()
+        query = "insert into creditcard(b_id, c_name, c_number, c_cvv, c_expdate) values (%s, %s, %s, %s, %s) returning c_id;"
+        cursor.execute(query, (b_id, c_name, c_number, c_cvv, c_expdate,))
+        c_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return c_id

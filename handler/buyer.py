@@ -17,6 +17,20 @@ class BuyerHandler:
         result['u_age'] = row[9]
         return result
 
+    def build_buyer_attributes(self, b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age):
+        result = {}
+        result['b_id'] = b_id
+        result['u_name'] = u_name
+        result['u_lastname'] = u_lastname
+        result['u_email'] = u_email
+        result['u_password'] = u_password
+        result['u_address'] = u_address
+        result['u_city'] =  u_city
+        result['u_region'] = u_region
+        result['u_phone'] = u_phone
+        result['u_age'] = u_age
+        return result
+
     def build_transaction_dict(self, row):
         result = {}
         result['t_id'] = row[0]
@@ -167,3 +181,57 @@ class BuyerHandler:
                 result = self.build_transaction_dict(row)
                 result_list.append(result)
             return jsonify(Transactions=result_list)
+
+    def insertBuyer(self, form):
+        if len(form) != 9:
+            return jsonify(Error = "Malformed post request"), 400
+        else:
+            u_name = form['u_name']
+            u_lastname = form['u_lastname']
+            u_email = form['u_email']
+            u_password = form['u_password']
+            u_address = form['u_address']
+            u_city = form['u_city']
+            u_region = form['u_region']
+            u_phone = form['u_phone']
+            u_age = form['u_age']
+            if u_name and u_lastname and u_email and u_password and u_address and u_city and u_region and u_phone and u_age:
+                dao = BuyerDAO()
+                b_id = dao.insert(u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
+                result = self.build_buyer_attributes(b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
+                return jsonify(Buyer=result), 201
+            else:
+                return jsonify(Error="Unexpected attributes in post request"), 400
+
+    def deleteBuyer(self, b_id):
+        dao = BuyerDAO()
+        if not dao.getBuyerById(b_id):
+            return jsonify(Error = "Buyer not found."), 404
+        else:
+            dao.delete(b_id)
+            return jsonify(DeleteStatus = "OK"), 200
+
+    def updateBuyer(self, b_id, form):
+        dao = BuyerDAO()
+        if not dao.getBuyerById(b_id):
+            return jsonify(Error = "Buyer not found."), 404
+        else:
+            if len(form) != 9:
+                return jsonify(Error="Malformed update request"), 400
+            else:
+                u_name = form['u_name']
+                u_lastname = form['u_lastname']
+                u_email = form['u_email']
+                u_password = form['u_password']
+                u_address = form['u_address']
+                u_city = form['u_city']
+                u_region = form['u_region']
+                u_phone = form['u_phone']
+                u_age = form['u_age']
+                if u_name and u_lastname and u_email and u_password and u_address and u_city and u_region and u_phone and u_age:
+                    dao = BuyerDAO()
+                    dao.update(b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
+                    result = self.build_buyer_attributes(b_id, u_name, u_lastname, u_email, u_password, u_address, u_city, u_region, u_phone, u_age)
+                    return jsonify(Buyer=result), 201
+                else:
+                    return jsonify(Error="Unexpected attributes in update request"), 400

@@ -120,3 +120,25 @@ class RequestDAO:
         for row in cursor:
             result.append(row)
         return result
+
+    def insert(self, b_id, r_id, rq_qty, rq_fulfillment):
+        cursor = self.conn.cursor()
+        query = "insert into request(b_id, r_id, rq_qty, rq_fulfillment) values (%s, %s, %s, %s) returning rq_id;"
+        cursor.execute(query, (b_id, r_id, rq_qty, rq_fulfillment,))
+        rq_id = cursor.fetchone()[0]
+        self.conn.commit()
+        return rq_id
+
+    def delete(self, rq_id):
+        cursor = self.conn.cursor()
+        query = "delete from request where rq_id = %s;"
+        cursor.execute(query, (rq_id,))
+        self.conn.commit()
+        return rq_id
+
+    def update(self, rq_id, b_id, r_id, rq_qty, rq_fulfillment):
+        cursor = self.conn.cursor()
+        query = "update request set b_id = %s, r_id = %s, rq_qty = %s, rq_fulfillment = %s where rq_id = %s;"
+        cursor.execute(query, (b_id, r_id, rq_qty, rq_fulfillment, rq_id,))
+        self.conn.commit()
+        return rq_id

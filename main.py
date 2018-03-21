@@ -15,15 +15,16 @@ app = Flask(__name__)
 def home():
     return 'Welcome to the Disaster Relief App!<br/>' \
            'The possible URLs are: <br/>' \
-           '/administrators<br/>' \
-           '/resources<br/>' \
-           '/buyers<br/>' \
-           '/sellers<br/>' \
-           '/announcements<br/>' \
-           '/requests<br/>' \
-           '/bankaccounts<br/>' \
-           '/creditcards<br/>' \
-           '/transactions'
+           '/DisasterApp<br/>' \
+           '/DisasterApp/administrators<br/>' \
+           '/DisasterApp/resources<br/>' \
+           '/DisasterApp/buyers<br/>' \
+           '/DisasterApp/sellers<br/>' \
+           '/DisasterApp/announcements<br/>' \
+           '/DisasterApp/requests<br/>' \
+           '/DisasterApp/bankaccounts<br/>' \
+           '/DisasterApp/creditcards<br/>' \
+           '/DisasterApp/transactions'
 
 
 @app.route('/DisasterApp')
